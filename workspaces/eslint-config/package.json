@@ -1,0 +1,12 @@
+{
+  "name": "@ultrabis/eslint-config",
+  "version": "0.0.0",
+  "description": "ultrabis common ESLint config",
+  "author": "kmmiles <kenneth.mmiles@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultrabis/ultrabis.git"
+  }
+}

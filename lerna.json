@@ -1,0 +1,13 @@
+{
+  "version": "0.0.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "ignoreChanges": ["ignored-file", "*.md"],
+      "message": "chore(release): publish",
+      "registry": "http://npm.pkg.github.com"
+    }
+  },
+  "packages": [ "workspaces/*" ]
+}
