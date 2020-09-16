@@ -368,7 +368,10 @@ export const wowheadScrapeItemList = async () => {
     // Wowhead uses JavaScript to load in their table content, so we'd need something like Selenium to get the HTML.
     // However, that is really painful and slow. Fortunately, with some parsing the table content is available in the source code.
     const $ = cheerio.load(req.body)
-    const tableContentRaw = $('script[type="text/javascript"]').get()[0].children[0].data.split('\n')[1].slice(26, -2)
+    const tableContentRaw = $('script[type="text/javascript"]')
+      .get()[0]
+      .children[0].data.split('\n')[1]
+      .slice(26, -2)
     const tableContent = JSON.parse(tableContentRaw)
 
     for (const key of Object.keys(tableContent)) {
@@ -488,7 +491,10 @@ export const getItemSuffixFromItemNameAndValues = (
   return undefined
 }
 
-export const getItemSuffix = (itemSuffixJSONArray: ItemSuffixJSON[], suffixId: number): ItemSuffixJSON | undefined => {
+export const getItemSuffix = (
+  itemSuffixJSONArray: ItemSuffixJSON[],
+  suffixId: number
+): ItemSuffixJSON | undefined => {
   const suffixCount = itemSuffixJSONArray.length
 
   for (let i = 0; i < suffixCount; i++) {
@@ -500,7 +506,10 @@ export const getItemSuffix = (itemSuffixJSONArray: ItemSuffixJSON[], suffixId: n
   return undefined
 }
 
-export const getRandomEnchantJSON = (baseItemJSON: ItemJSON, itemSuffixJSON: ItemSuffixJSON): ItemJSON => {
+export const getRandomEnchantJSON = (
+  baseItemJSON: ItemJSON,
+  itemSuffixJSON: ItemSuffixJSON
+): ItemJSON => {
   const itemJSON = cloneObject(baseItemJSON)
 
   // add suffixId and remove validSuffixIds
@@ -808,7 +817,8 @@ export const wowheadParseItem = async (
 
   const xml = dataStrings[0]
   const html = dataStrings[1]
-  const override: ItemJSON | undefined = dataStrings[2] !== `` ? JSON.parse(dataStrings[2]) : undefined
+  const override: ItemJSON | undefined =
+    dataStrings[2] !== `` ? JSON.parse(dataStrings[2]) : undefined
 
   const itemJSON = {} as ItemJSON
   itemJSON.id = itemId
@@ -995,14 +1005,22 @@ export const wowheadParseItem = async (
 
         let itemSuffix
 
-        itemSuffix = getItemSuffixFromItemNameAndValues(suffixes, `x ${suffixTypeText}`, bonusValuesX)
+        itemSuffix = getItemSuffixFromItemNameAndValues(
+          suffixes,
+          `x ${suffixTypeText}`,
+          bonusValuesX
+        )
         if (itemSuffix) {
           if (!opts || !opts.validSuffixTypes || opts.validSuffixTypes.includes(itemSuffix.type)) {
             validSuffixIds.push(itemSuffix.id)
           }
         }
 
-        itemSuffix = getItemSuffixFromItemNameAndValues(suffixes, `x ${suffixTypeText}`, bonusValuesY)
+        itemSuffix = getItemSuffixFromItemNameAndValues(
+          suffixes,
+          `x ${suffixTypeText}`,
+          bonusValuesY
+        )
         if (itemSuffix) {
           if (!opts || !opts.validSuffixTypes || opts.validSuffixTypes.includes(itemSuffix.type)) {
             validSuffixIds.push(itemSuffix.id)
@@ -1038,15 +1056,22 @@ export const wowheadParseItem = async (
   return output
 }
 
-export const wowheadParseItems = async (itemListFile: string, opts?: { validSuffixTypes?: number[] }) => {
+export const wowheadParseItems = async (
+  itemListFile: string,
+  opts?: { validSuffixTypes?: number[] }
+) => {
   const limit = plimit(10)
-  const itemSuffixFile = fs.existsSync(cacheItemSuffixFile) ? cacheItemSuffixFile : masterItemSuffixFile
+  const itemSuffixFile = fs.existsSync(cacheItemSuffixFile)
+    ? cacheItemSuffixFile
+    : masterItemSuffixFile
   const itemSuffixes: ItemSuffixJSON[] = await jsonFromFileAsync(itemSuffixFile)
   const parsePromises: Promise<WowheadItemParserResult>[] = []
 
   const itemList = await jsonFromFileAsync(itemListFile)
   for (let i = 0; i < itemList.length; i++) {
-    parsePromises.push(limit(() => wowheadParseItem(itemList[i].id, itemList[i].name, itemSuffixes, opts)))
+    parsePromises.push(
+      limit(() => wowheadParseItem(itemList[i].id, itemList[i].name, itemSuffixes, opts))
+    )
   }
 
   return Promise.all(parsePromises)
@@ -1112,11 +1137,19 @@ export const createDBMoonkin = async () => {
 }
 
 export const createDBWarlock = async () => {
-  return createDBCustom('warlock', [ItemSuffixType.ShadowWrath, ItemSuffixType.FieryWrath, ItemSuffixType.Sorcery])
+  return createDBCustom('warlock', [
+    ItemSuffixType.ShadowWrath,
+    ItemSuffixType.FieryWrath,
+    ItemSuffixType.Sorcery
+  ])
 }
 
 export const createDBMage = async () => {
-  return createDBCustom('mage', [ItemSuffixType.FieryWrath, ItemSuffixType.FrozenWrath, ItemSuffixType.Sorcery])
+  return createDBCustom('mage', [
+    ItemSuffixType.FieryWrath,
+    ItemSuffixType.FrozenWrath,
+    ItemSuffixType.Sorcery
+  ])
 }
 
 export const createDBFeral = async () => {
@@ -1154,7 +1187,10 @@ export const createDBCustom = async (dbName: string, validSuffixTypes: number[])
     } else if (fs.existsSync(customTXTFile)) {
       await fsPromises.writeFile(itemListFile, JSON.stringify(await parseTXT(customTXTFile)))
     } else {
-      await fsPromises.writeFile(itemListFile, JSON.stringify(await parseCSV(customCSVFile, 'Name')))
+      await fsPromises.writeFile(
+        itemListFile,
+        JSON.stringify(await parseCSV(customCSVFile, 'Name'))
+      )
     }
   }
 
@@ -1225,7 +1261,10 @@ export const parseTXT = async (txtFilePath: string): Promise<ItemListJSON[]> => 
   return results
 }
 
-export const parseCSV = async (csvFilePath: string, itemNameKey: string): Promise<ItemListJSON[]> => {
+export const parseCSV = async (
+  csvFilePath: string,
+  itemNameKey: string
+): Promise<ItemListJSON[]> => {
   const results: ItemListJSON[] = []
   const itemNameSet: Set<string> = new Set()
 

@@ -1,0 +1,9 @@
+{
+  "extends": "@ultrabis/tsconfig",
+  "compilerOptions": {
+    "outDir": "./lib/esm"
+  },
+  "include": [
+    "./src"
+  ]
+}

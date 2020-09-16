@@ -18,7 +18,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off'
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/explicit-function-return-type': ['error']
   }
 };
