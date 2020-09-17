@@ -1,13 +1,9 @@
-import Gender from '../enum/Gender'
-import PlayableRace from '../enum/PlayableRace'
-import PlayableClass from '../enum/PlayableClass'
-import PvPRank from '../enum/PvPRank'
 import TalentSettings from './TalentSettings'
+import { PlayableRace, PlayableClass, PvPRank } from '@ultrabis/enum'
 
 export default interface PlayerSettings {
   rotation: string
   level: number
-  gender: Gender
   race: PlayableRace
   class: PlayableClass
   pvpRank: PvPRank

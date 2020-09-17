@@ -1,4 +1,4 @@
-import ItemBonusType from '../enum/ItemBonusType'
+import { ItemBonusType } from '@ultrabis/enum'
 
 export default interface ItemBonus {
   type: ItemBonusType

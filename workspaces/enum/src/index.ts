@@ -1,5 +1,7 @@
-export { default as ArmorSubClass } from './ArmorSubclass'
+export { default as ArmorSubclass } from './ArmorSubclass'
 export { default as Buff }  from './Buff'
+export { default as CustomGearIndex } from './CustomGearIndex'
+export { default as CustomGearValue } from './CustomGearValue'
 export { default as Faction } from './Faction'
 export { default as GameType } from './GameType'
 export { default as GearSlot } from './GearSlot'

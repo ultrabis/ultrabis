@@ -1,4 +1,4 @@
-import ItemSlot from '../enum/ItemSlot'
+import { ItemSlot } from '@ultrabis/enum'
 
 export default interface Enchant {
   id: number

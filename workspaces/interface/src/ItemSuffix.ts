@@ -1,7 +1,5 @@
-/** database */
-
 import ItemBonus from './ItemBonus'
-import ItemSuffixType from '../enum/ItemSuffixType'
+import { ItemSuffixType } from '@ultrabis/enum'
 
 export default interface ItemSuffix {
   id: number

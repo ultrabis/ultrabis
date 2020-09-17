@@ -10,5 +10,11 @@
     "test:common": "ts-node -T tests/common.ts",
     "test:util": "ts-node -T tests/util.ts",
     "download": "ts-node -T bin/wowhead-download.ts"
+  },
+  "dependencies": {
+    "@ultrabis/util": "0.0.0",
+    "@ultrabis/enum": "0.0.0",
+    "@ultrabis/interface": "0.0.0",
+    "@ultrabis/common": "0.0.0"
   }
 }

@@ -1,14 +1,17 @@
-import ItemSlot from '../enum/ItemSlot'
-import GearSlot from '../enum/GearSlot'
-import ItemQuality from '../enum/ItemQuality'
-import ItemClass from '../enum/ItemClass'
-import ArmorSubclass from '../enum/ArmorSubclass'
-import WeaponSubclass from '../enum/WeaponSubclass'
-import PlayableClass from '../enum/PlayableClass'
-import Faction from '../enum/Faction'
-import PvPRank from '../enum/PvPRank'
-import TargetType from '../enum/TargetType'
-import ItemOnUseJSON from './ItemOnUseJSON'
+import ItemOnUseRecord from './ItemOnUseRecord'
+
+import {
+  ItemSlot,
+  GearSlot,
+  ItemQuality,
+  ItemClass,
+  ArmorSubclass,
+  WeaponSubclass,
+  PlayableClass,
+  Faction,
+  PvPRank,
+  TargetType
+} from '@ultrabis/enum'
 
 export default interface Item {
   id: number
@@ -50,6 +53,6 @@ export default interface Item {
   maxDmg: number
   speed: number
   dps: number
-  onUse: ItemOnUseJSON
+  onUse: ItemOnUseRecord
   score?: number
 }

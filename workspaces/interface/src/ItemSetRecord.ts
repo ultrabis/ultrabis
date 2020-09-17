@@ -1,6 +1,6 @@
-import ItemJSON from './ItemJSON'
+import ItemRecord from './ItemRecord'
 
-export default interface ItemSetJSON {
+export default interface ItemSetRecord {
   name: string
   phase: number
   raid: boolean
@@ -9,6 +9,6 @@ export default interface ItemSetJSON {
   spellCrit?: number
   spellDamage?: number
   itemNames: string[]
-  items?: ItemJSON[]
+  items?: ItemRecord[]
   score?: number
 }

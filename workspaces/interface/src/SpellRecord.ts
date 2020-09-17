@@ -1,5 +1,5 @@
-import MagicSchool from '../enum/MagicSchool'
-import SpellType from '../enum/SpellType'
+import { MagicSchool } from '@ultrabis/enum'
+import { SpellType } from '@ultrabis/enum'
 /**
  * spells stored in JSON 'database'. the smaller this can get, the better.
  */

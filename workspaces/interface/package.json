@@ -14,5 +14,8 @@
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "build": "yarn run tsc",
     "prepublishOnly": "yarn run clean && yarn run build"
+  },
+  "dependencies": {
+    "@ultrabis/enum": "0.0.0"
   }
 }

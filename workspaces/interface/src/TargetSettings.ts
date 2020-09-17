@@ -1,5 +1,5 @@
-import MagicSchool from '../enum/MagicSchool'
-import TargetType from '../enum/TargetType'
+import { MagicSchool } from '@ultrabis/enum'
+import { TargetType } from '@ultrabis/enum'
 
 export default interface TargetSettings {
   level: number
