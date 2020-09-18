@@ -38,14 +38,14 @@ export const fuzzyIncludes = (haystack: string, needle: string): boolean => {
 }
 
 /**
- * 
+ *
  * Test fuzzy equality of two strings
- * 
- * @param string1 
- * @param string2 
+ *
+ * @param string1
+ * @param string2
  */
 export const fuzzyEquals = (string1: string, string2: string): boolean => {
-  return fuzzifyString(string1) === fuzzifyString(string2) 
+  return fuzzifyString(string1) === fuzzifyString(string2)
 }
 
 /**

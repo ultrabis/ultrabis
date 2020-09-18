@@ -4,12 +4,11 @@
   "license": "MIT",
   "prettier": "@ultrabis/prettier-config",
   "scripts": {
-    "build": "ts-node -T bin/build.ts",
-    "lint": "eslint --fix ./src",
+    "build:cache": "ts-node -sT bin/build-cache.ts",
+    "build:db": "ts-node -sT bin/build-db.ts",
     "test:node": "ts-node -T tests/node.ts",
     "test:common": "ts-node -T tests/common.ts",
-    "test:util": "ts-node -T tests/util.ts",
-    "download": "ts-node -T bin/wowhead-download.ts"
+    "test:util": "ts-node -T tests/util.ts"
   },
   "dependencies": {
     "@ultrabis/util": "0.0.0",

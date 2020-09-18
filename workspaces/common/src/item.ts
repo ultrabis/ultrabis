@@ -15,7 +15,12 @@ export const itemSuffixTypeFromName = (itemName: string): ItemSuffixType | undef
   }
 
   /* Skip silly item names that contradict the games suffix naming convention */
-  const sillyItemNames = ['Hands of Power', 'Tome of Power', 'Tome of Restoration']
+  const sillyItemNames = [
+    `Hands of Power`,
+    `Grand Marshal's Tome of Power`,
+    `Grand Marshal's Tome of Restoration`
+  ]
+
   if (sillyItemNames.find((silly) => fuzzyEquals(itemName, silly))) {
     return undefined
   }

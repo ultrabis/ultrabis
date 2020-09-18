@@ -2,15 +2,23 @@
 /// <reference types="jest" />
 
 import * as common from '../src/index'
-import { ItemSuffixType } from '@ultrabis/enum'
+import { ItemSuffixType, PlayableClass } from '@ultrabis/enum'
+
+test('misc', () => {
+  expect(common.playableClassesFromText(`Classes: Warrior, Paladin, Hunter`)).toStrictEqual([
+    PlayableClass.Warrior,
+    PlayableClass.Paladin,
+    PlayableClass.Hunter
+  ])
+})
 
 test('itemSuffixTypeFromName', () => {
   expect(common.itemSuffixTypeFromName(`Master's Hat of Arcane Wrath`)).toBe(
     ItemSuffixType.ArcaneWrath
   )
   expect(common.itemSuffixTypeFromName(`Hands of Power`)).toBe(undefined)
-  expect(common.itemSuffixTypeFromName(`Tome of Power`)).toBe(undefined)
-  expect(common.itemSuffixTypeFromName(`Tome of Restoration`)).toBe(undefined)
+  expect(common.itemSuffixTypeFromName(`Grand Marshal's Tome of Power`)).toBe(undefined)
+  expect(common.itemSuffixTypeFromName(`Grand Marshal's Tome of Restoration`)).toBe(undefined)
 })
 
 test('resistance', () => {

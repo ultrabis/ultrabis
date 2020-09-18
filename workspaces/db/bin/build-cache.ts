@@ -1,4 +1,4 @@
-import { wowheadDownloadItems, wowheadDownloadAbilities } from '../src/node'
+import { wowheadDownloadItems, wowheadDownloadAbilities } from './common'
 import { exit } from 'process'
 
 const main = async () => {

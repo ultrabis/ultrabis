@@ -1,19 +1,18 @@
-import * as node from '../src/node'
-import fs from 'fs'
+import * as common from './common'
 import rimraf from 'rimraf'
 
 const argv = require('minimist')(process.argv.slice(2))
 const dbName = argv._[0]
 
-const build = async () => {
+const build = async (): Promise<void> => {
   if (dbName && dbName === 'moonkin') {
-    return await node.createDBMoonkin()
+    return await common.createDBMoonkin()
   } else if (dbName && dbName === 'warlock') {
-    return await node.createDBWarlock()
+    return await common.createDBWarlock()
   } else if (dbName && dbName === 'feral') {
-    return await node.createDBFeral()
+    return await common.createDBFeral()
   } else if (dbName && dbName === 'mage') {
-    return await node.createDBMage()
+    return await common.createDBMage()
   }
 
   // clean destination
@@ -21,23 +20,19 @@ const build = async () => {
   rimraf.sync(`dist`)
 
   console.log(`creating 'full' database`)
-  await node.createDBFull()
+  await common.createDBFull()
 
   console.log(`creating 'moonkin' database`)
-  await node.createDBMoonkin()
+  await common.createDBMoonkin()
 
   console.log(`creating 'warlock' database`)
-  await node.createDBWarlock()
+  await common.createDBWarlock()
 
   console.log(`creating 'feral' database`)
-  await node.createDBFeral()
+  await common.createDBFeral()
 
   console.log(`creating 'mage' database`)
-  await node.createDBMage()
-
-  console.log(`copying interfaces`)
-  fs.copyFileSync(`src/interface/ItemJSON.ts`, `dist/ItemJSON.ts`)
-  fs.copyFileSync(`src/interface/ItemSuffixJSON.ts`, `dist/ItemSuffixJSON.ts`)
+  await common.createDBMage()
 
   console.log(`complete`)
 }

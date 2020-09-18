@@ -57,6 +57,17 @@ export const stringFromFile = (filePath: string): string => {
 
 /**
  *
+ * Write string `data` to `filePath`
+ *
+ * @param filePath
+ * @param data
+ */
+export const stringToFile = (filePath: string, data: string): void => {
+  return fs.writeFileSync(filePath, data)
+}
+
+/**
+ *
  * read gzip file as plain text string
  *
  * @param filePath
@@ -77,10 +88,42 @@ export const jsonFromFile = (filePath: string): any => {
 
 /**
  *
+ * Write `myJSON` to `filePath`, stringifying it first
+ *
+ * @param filePath
+ * @param myJSON
+ */
+export const jsonToFile = (filePath: string, myJSON: object): void => {
+  return stringToFile(filePath, JSON.stringify(myJSON))
+}
+
+/**
+ *
  * read JSON from a gzipped file
  *
  * @param filePath
  */
 export const jsonFromGzipFile = (filePath: string): any => {
   return JSON.parse(stringFromGzipFile(filePath))
+}
+
+/**
+ * Does `filePath` exist?
+ *
+ * @param filePath
+ */
+export const fileExists = (filePath: string): boolean => {
+  return fs.existsSync(filePath)
+}
+
+/**
+ *
+ * Remove file at `filePath`, if it exists
+ *
+ * @param filePath
+ */
+export const removeFile = (filePath: string): void => {
+  if (fileExists(filePath)) {
+    fs.unlinkSync(filePath)
+  }
 }
