@@ -1,5 +1,5 @@
-# my custom stuff
 workspaces/*/lib/
+/dist
 
 # Logs
 logs
@@ -8,6 +8,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+pnpm-debug.log*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -72,6 +73,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+.env.local
+.env.*.local
 .env
 .env.test
 
@@ -105,3 +108,16 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Editor directories and files
+.idea
+#.vscode # XXX: I want my settings commited. Maybe bad idea, dunno
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Apple
+.DS_Store
+
