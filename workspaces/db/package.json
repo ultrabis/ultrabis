@@ -6,9 +6,7 @@
   "scripts": {
     "build:cache": "ts-node -sT bin/build-cache.ts",
     "build:db": "ts-node -sT bin/build-db.ts",
-    "test:node": "ts-node -T tests/node.ts",
-    "test:common": "ts-node -T tests/common.ts",
-    "test:util": "ts-node -T tests/util.ts"
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
   },
   "dependencies": {
     "@ultrabis/util": "0.0.0",

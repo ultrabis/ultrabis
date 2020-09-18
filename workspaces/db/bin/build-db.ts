@@ -1,5 +1,5 @@
 import * as common from './common'
-import rimraf from 'rimraf'
+import fs from 'fs'
 
 const argv = require('minimist')(process.argv.slice(2))
 const dbName = argv._[0]
@@ -15,10 +15,6 @@ const build = async (): Promise<void> => {
     return await common.createDBMage()
   }
 
-  // clean destination
-  console.log(`cleaning dist...`)
-  rimraf.sync(`dist`)
-
   console.log(`creating 'full' database`)
   await common.createDBFull()
 
@@ -33,6 +29,9 @@ const build = async (): Promise<void> => {
 
   console.log(`creating 'mage' database`)
   await common.createDBMage()
+
+  console.log(`copying abilities (TODO)`)
+  fs.copyFileSync(`cache/abilityList-master.json`, `src/db/full/ability.json`)
 
   console.log(`complete`)
 }

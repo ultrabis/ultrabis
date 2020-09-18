@@ -812,7 +812,7 @@ export const createDB = async (
   itemListFile: string,
   opts?: { validSuffixTypes?: number[] }
 ): Promise<void> => {
-  mkdirp.sync(`dist/${dbName}`)
+  mkdirp.sync(`src/db/${dbName}`)
 
   // parse items
   console.log(`parsing items from ${itemListFile}`)
@@ -820,13 +820,13 @@ export const createDB = async (
   const items = await wowheadParseItems(itemListFile, opts)
 
   // write db
-  console.log(`writing files to dist/${dbName}`)
+  console.log(`writing files to src/db/${dbName}`)
   await wowheadWriteItems(
     items,
-    `dist/${dbName}/item.json`,
-    `dist/${dbName}/item-modular.json`,
-    `dist/${dbName}/item-random.json`,
-    `dist/${dbName}/itemSuffix.json`
+    `src/db/${dbName}/item.json`,
+    `src/db/${dbName}/item-modular.json`,
+    `src/db/${dbName}/item-random.json`,
+    `src/db/${dbName}/itemSuffix.json`
   )
 
   const elapsedTime = hrTimeToSeconds(process.hrtime(startTime))

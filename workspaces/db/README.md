@@ -20,11 +20,6 @@ Modular and suffix can be combined to generate random enchant items at runtime, 
 | [warlock (172K)][warlock-main] | [warlock (145K)][warlock-modular] | [warlock (2K)][warlock-suffix] |
 | [mage (99K)][mage-main] | [mage (73K)][mage-modular] | [mage (2K)][mage-suffix] |
 
-### typescript interfaces
-
-- [ItemJSON.ts](https://ultrabis.github.io/db/ItemJSON.ts)
-- [ItemSuffixJSON.ts](https://ultrabis.github.io/db/ItemSuffixJSON.ts)
-
 ### icons
 
 The icons for all items are included in `cache/icons`

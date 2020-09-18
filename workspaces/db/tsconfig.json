@@ -1,6 +1,7 @@
 {
   "extends": "@ultrabis/tsconfig",
   "compilerOptions": {
+    "resolveJsonModule": true,
     "outDir": "./lib/esm"
   },
   "include": [

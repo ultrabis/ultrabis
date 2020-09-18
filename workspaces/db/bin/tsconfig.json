@@ -10,7 +10,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": false,
-    "resolveJsonModule": true,
-    "outDir": "./dist"
+    "resolveJsonModule": true
   }
 }
