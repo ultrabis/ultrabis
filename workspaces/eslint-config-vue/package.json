@@ -1,0 +1,12 @@
+{
+  "name": "@ultrabis/eslint-config-vue",
+  "version": "0.0.0",
+  "description": "eslint config for vue projects",
+  "author": "kmmiles <kenneth.mmiles@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultrabis/ultrabis.git"
+  }
+}
