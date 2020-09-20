@@ -1,6 +1,7 @@
 module.exports = {
   'extends': [
     '@ultrabis/eslint-config',
-    'plugin:vue/base'
+    'plugin:vue/essential',
+    '@vue/typescript/recommended'
   ]
 }
