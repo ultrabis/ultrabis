@@ -1,7 +1,6 @@
 import { wowheadDownloadItems, wowheadDownloadAbilities } from './common'
-import { exit } from 'process'
 
-const main = async () => {
+const main = async (): Promise<void> => {
   await wowheadDownloadItems()
   await wowheadDownloadAbilities()
 }

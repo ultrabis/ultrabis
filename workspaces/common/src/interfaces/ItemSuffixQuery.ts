@@ -1,4 +1,4 @@
-import { ItemSuffixType } from '@ultrabis/enum'
+import { ItemSuffixType } from '../enums'
 
 export default interface ItemSuffixQuery {
   id?: number

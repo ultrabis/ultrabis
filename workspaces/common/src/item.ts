@@ -1,5 +1,5 @@
 import { fuzzyEquals, enumValueFromKey } from '@ultrabis/util'
-import { ItemSuffixType } from '@ultrabis/enum'
+import { ItemSuffixType } from './enums'
 
 /**
  *

@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@ultrabis/util": "0.0.0",
-    "@ultrabis/enum": "0.0.0",
-    "@ultrabis/interface": "0.0.0",
     "@ultrabis/common": "0.0.0"
   }
 }

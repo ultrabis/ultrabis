@@ -1,5 +1,5 @@
 import ItemBonus from './ItemBonus'
-import { ItemSuffixType } from '@ultrabis/enum'
+import { ItemSuffixType } from '../enums'
 
 export default interface ItemSuffix {
   id: number

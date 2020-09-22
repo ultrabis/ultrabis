@@ -11,7 +11,7 @@ import {
   Faction,
   PvPRank,
   TargetType
-} from '@ultrabis/enum'
+} from '../enums'
 
 export default interface Item {
   id: number

@@ -8,6 +8,8 @@ import zlib from 'zlib'
  * download `url` to `dest`. by default we request and write as gzip. if opts.unzip
  * is true and it's indeed gzipped, we'll unzip it first.
  *
+ * TODO: replace with https://github.com/node-fetch/node-fetch
+ *
  * @param url
  * @param dest
  * @param opts

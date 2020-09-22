@@ -1,25 +1,27 @@
 import { cloneObject } from '@ultrabis/util'
-import { ItemRecord, ItemSuffixRecord } from '@ultrabis/interface'
-import { ItemBonusType, ItemSuffixType } from '@ultrabis/enum'
+import { ItemRecord, ItemSuffixRecord, ItemBonusType, ItemSuffixType } from '@ultrabis/common'
 
 /* TODO: some dumb method we're not exporting */
-const zsum = (one: number | undefined, two: number | undefined) => {
+const zsum = (one: number | undefined, two: number | undefined): number | undefined => {
   const val = (one ? one : 0) + (two ? two : 0)
   return val ? val : undefined
 }
 
 /**
- * 
- * Returns a 'random enchant' item record based on the base item and item suffix records. 
- * This is used to support random enchant items in the 'modular' database. 
+ *
+ * Returns a 'random enchant' item record based on the base item and item suffix records.
+ * This is used to support random enchant items in the 'modular' database.
  * Using this method saves a crapload of space vs storing each individual item.
  *
  * @param baseItemRecord e.g. Master's Hat
  * @param itemSuffixRecord contains the suffix type e.g. 'Arcane Wrath' and bonus values
  */
-export const affixItemRecord = (baseItemRecord: ItemRecord, itemSuffixRecord: ItemSuffixRecord) => {
+export const affixItemRecord = (
+  baseItemRecord: ItemRecord,
+  itemSuffixRecord: ItemSuffixRecord
+): ItemRecord => {
   const itemRecord = cloneObject(baseItemRecord)
-  
+
   // add suffixId and remove validSuffixIds
   itemRecord.validSuffixIds = undefined
   itemRecord.suffixId = itemSuffixRecord.id

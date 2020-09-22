@@ -1,4 +1,4 @@
-import { ItemSlot } from '@ultrabis/enum'
+import { ItemSlot } from '../enums'
 
 export default interface GearSettings {
   custom: number[][] // [GearSlot][itemId, suffixId, enchantId]. itemId and enchantId can also be (0 = BIS, 1 = Naked).

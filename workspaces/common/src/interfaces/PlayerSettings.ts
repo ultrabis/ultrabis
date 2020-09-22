@@ -1,5 +1,5 @@
 import TalentSettings from './TalentSettings'
-import { PlayableRace, PlayableClass, PvPRank } from '@ultrabis/enum'
+import { PlayableRace, PlayableClass, PvPRank } from '../enums'
 
 export default interface PlayerSettings {
   rotation: string

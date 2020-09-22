@@ -1,4 +1,4 @@
-import { PvPRank, PlayableClass } from '@ultrabis/enum'
+import { PvPRank, PlayableClass } from './enums'
 import { enumValueFromKey, enumValuesFromKeys } from '@ultrabis/util'
 
 export const pvpRankFromText = (text: string): PvPRank | undefined => {

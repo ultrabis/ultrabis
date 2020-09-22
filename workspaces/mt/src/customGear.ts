@@ -14,8 +14,7 @@
  *
  */
 
-import { GearSettings } from '@ultrabis/interface'
-import { GearSlot, CustomGearIndex, CustomGearValue } from '@ultrabis/enum'
+import { GearSettings, GearSlot, CustomGearIndex, CustomGearValue } from '@ultrabis/common'
 
 /**
  *

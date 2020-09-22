@@ -1,16 +1,15 @@
-import { ItemSlot } from '@ultrabis/enum'
+import { ItemSlot } from '../enums'
 
-export default interface EnchantJSON {
+export default interface Enchant {
   id: number
   name: string
   slot: ItemSlot
   phase: number
   icon: string
-  score: number
   text: string
-  exploit?: boolean
-  spellHealing?: number
-  armor?: number
+  exploit: boolean
+  spellHealing: number
+  armor: number
   spellDamage: number
   arcaneDamage: number
   natureDamage: number
@@ -21,4 +20,5 @@ export default interface EnchantJSON {
   intellect: number
   spirit: number
   mp5: number
+  score: number
 }

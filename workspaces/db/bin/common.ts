@@ -19,9 +19,13 @@ import {
   fileExists,
   download
 } from '@ultrabis/util'
-import { ItemRecord, ItemSuffixRecord, ItemListRecord } from '@ultrabis/interface'
-import { ItemSuffixType, TargetType } from '@ultrabis/enum'
+
 import {
+  ItemRecord,
+  ItemSuffixRecord,
+  ItemListRecord,
+  ItemSuffixType,
+  TargetType,
   itemBaseName,
   itemSuffixTypeFromName,
   pvpRankFromText,

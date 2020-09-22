@@ -1,4 +1,4 @@
-import { GameType } from '@ultrabis/enum'
+import { GameType } from '../enums'
 
 export default interface GameSettings {
   type: GameType

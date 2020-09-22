@@ -1,4 +1,4 @@
-import { ItemSlot, Faction, PvPRank } from '@ultrabis/enum'
+import { ItemSlot, Faction, PvPRank } from '../enums'
 
 export default interface ItemQuery {
   id?: number
