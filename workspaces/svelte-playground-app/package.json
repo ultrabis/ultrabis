@@ -1,6 +1,7 @@
 {
   "name": "@ultrabis/svelte-playground-app",
   "version": "0.0.0",
+  "prettier": "@ultrabis/prettier-config",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
