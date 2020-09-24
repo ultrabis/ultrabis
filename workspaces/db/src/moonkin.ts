@@ -1,2 +1,5 @@
-export { default as item } from './db/moonkin/item-modular.json'
-export { default as itemSuffix } from './db/moonkin/itemSuffix.json'
+import item from './db/moonkin/item.json'
+import itemStatic from './db/moonkin/item-static.json'
+import itemSuffix from './db/moonkin/itemSuffix.json'
+
+export { item, itemStatic, itemSuffix }

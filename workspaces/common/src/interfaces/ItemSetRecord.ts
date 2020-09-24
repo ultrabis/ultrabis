@@ -1,14 +1,8 @@
-import ItemRecord from './ItemRecord'
-
 export default interface ItemSetRecord {
   name: string
-  phase: number
-  raid: boolean
-  tailoring: boolean
+  items: number[] // id's of each item in set
+  tailoring: boolean // bonus active with 300 tailoring
   spellHit?: number
   spellCrit?: number
   spellDamage?: number
-  itemNames: string[]
-  items?: ItemRecord[]
-  score?: number
 }

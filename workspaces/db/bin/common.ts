@@ -693,12 +693,12 @@ export const wowheadParseItems = async (
 export const wowheadWriteItems = async (
   parseResults: WowheadItemParserResult[],
   itemFile: string,
-  itemModularFile: string,
+  itemStaticFile: string,
   itemRandomFile: string,
   itemSuffixFile: string
 ): Promise<void> => {
+  const itemsStatic: ItemRecord[] = []
   const items: ItemRecord[] = []
-  const itemsModular: ItemRecord[] = []
   const itemsRandom: ItemRecord[] = []
   const itemSuffixSet: Set<ItemSuffixRecord> = new Set()
 
@@ -712,26 +712,27 @@ export const wowheadWriteItems = async (
       }
     }
 
-    // the modular item db only stores the 'base item' for random enchants
-    // that way we can save space and generate them at run time
-    itemsModular.push(parsedItem.item)
+    // the item db (a.k.a dynamic item db) only stores the 'base item' for
+    // random enchants (e.g. Master's Hat).
+    items.push(parsedItem.item)
 
-    // the random item db just stores random enchants. it's mostly
-    // for educational purposes
-    itemsRandom.push(...parsedItem.randomEnchants)
-
-    // the main item db stores everything except the 'base item' for the random enchants
+    // the static version stores all random enchant items, excluding the
+    // base items
     if (!parsedItem.item.validSuffixIds) {
-      items.push(parsedItem.item)
+      itemsStatic.push(parsedItem.item)
     }
-    items.push(...parsedItem.randomEnchants)
+    itemsStatic.push(...parsedItem.randomEnchants)
+
+    // also write an item db with *only* the random enchants.
+    // just for fun.
+    itemsRandom.push(...parsedItem.randomEnchants)
   }
 
   console.log(`writing item db: ${items.length}`)
   jsonToFile(itemFile, items)
 
-  console.log(`writing modular item db: ${itemsModular.length}`)
-  jsonToFile(itemModularFile, itemsModular)
+  console.log(`writing static item db: ${itemsStatic.length}`)
+  jsonToFile(itemStaticFile, itemsStatic)
 
   console.log(`writing random enchant item db: ${itemsRandom.length}`)
   jsonToFile(itemRandomFile, itemsRandom)
@@ -828,7 +829,7 @@ export const createDB = async (
   await wowheadWriteItems(
     items,
     `src/db/${dbName}/item.json`,
-    `src/db/${dbName}/item-modular.json`,
+    `src/db/${dbName}/item-static.json`,
     `src/db/${dbName}/item-random.json`,
     `src/db/${dbName}/itemSuffix.json`
   )

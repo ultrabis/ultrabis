@@ -1,11 +1,15 @@
 {
   "name": "@ultrabis/db",
   "version": "0.0.0",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "typing": "./lib/esm/index.d.ts",
   "license": "MIT",
   "prettier": "@ultrabis/prettier-config",
   "scripts": {
     "build:cache": "ts-node -sT bin/build-cache.ts",
     "build:db": "ts-node -sT bin/build-db.ts",
+    "test:integration": "ts-node -sT __integration__/index.ts",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
   },
   "dependencies": {

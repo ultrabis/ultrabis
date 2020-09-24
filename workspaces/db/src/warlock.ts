@@ -1,2 +1,5 @@
-export { default as item } from './db/warlock/item-modular.json'
-export { default as itemSuffix } from './db/warlock/itemSuffix.json'
+import item from './db/warlock/item.json'
+import itemStatic from './db/warlock/item-static.json'
+import itemSuffix from './db/warlock/itemSuffix.json'
+
+export { item, itemStatic, itemSuffix }

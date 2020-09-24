@@ -2,7 +2,7 @@
 /// <reference types="jest" />
 
 import * as common from '../src/index'
-import { ItemSuffixType, PlayableClass } from '@ultrabis/enum'
+import { ItemSuffixType, PlayableClass } from '../src/enums'
 
 test('misc', () => {
   expect(common.playableClassesFromText(`Classes: Warrior, Paladin, Hunter`)).toStrictEqual([

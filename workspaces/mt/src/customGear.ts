@@ -14,19 +14,19 @@
  *
  */
 
-import { GearSettings, GearSlot, CustomGearIndex, CustomGearValue } from '@ultrabis/common'
+import { GearSettingsObject, GearSlot, CustomGearIndex, CustomGearValue } from '@ultrabis/common'
 
 /**
  *
- * Set a value in gearSettings 'equipped' array
+ * Set a value in GearSettingsObject 'equipped' array
  *
- * @param gearSettings will be modified
+ * @param GearSettingsObject will be modified
  * @param index (0 = itemId, 1 = itemSuffixId, 2 = enchantId)
  * @param value itemId, suffixId, enchantId, GearState.BIS (0) or GearState.BIS (1)
  * @param gearSlot apply to one slot, or if undefined, all slots
  */
 const setValue = (
-  gearSettings: GearSettings,
+  GearSettingsObject: GearSettingsObject,
   index: CustomGearIndex,
   value: CustomGearValue | number,
   gearSlot?: GearSlot
@@ -34,57 +34,64 @@ const setValue = (
   if (!gearSlot) {
     const keys = Object.keys(GearSlot)
     for (let i = 0; i < keys.length; i++) {
-      gearSettings.custom[i][index] = value
+      GearSettingsObject.custom[i][index] = value
     }
     return
   }
 
-  gearSettings.custom[gearSlot][index] = value
+  GearSettingsObject.custom[gearSlot][index] = value
 }
 
 export const setItemId = (
-  gearSettings: GearSettings,
+  GearSettingsObject: GearSettingsObject,
   itemId: number,
   gearSlot?: GearSlot
 ): void => {
-  return setValue(gearSettings, 0, itemId, gearSlot)
+  return setValue(GearSettingsObject, 0, itemId, gearSlot)
 }
 
 export const setSuffixId = (
-  gearSettings: GearSettings,
+  GearSettingsObject: GearSettingsObject,
   itemSuffixId: number,
   gearSlot?: GearSlot
 ): void => {
-  return setValue(gearSettings, 1, itemSuffixId, gearSlot)
+  return setValue(GearSettingsObject, 1, itemSuffixId, gearSlot)
 }
 
 export const setEnchantId = (
-  gearSettings: GearSettings,
+  GearSettingsObject: GearSettingsObject,
   enchantId: number,
   gearSlot?: GearSlot
 ): void => {
-  return setValue(gearSettings, 2, enchantId, gearSlot)
+  return setValue(GearSettingsObject, 2, enchantId, gearSlot)
 }
 
 /**
- * Get a value in GearSettings `equipped` array
+ * Get a value in GearSettingsObject `equipped` array
  *
  * @param settings
  * @param index
  * @param gearSlot
  */
-const getValue = (gearSettings: GearSettings, index: number, gearSlot: GearSlot): number => {
-  return gearSettings.custom[gearSlot][index]
+const getValue = (
+  GearSettingsObject: GearSettingsObject,
+  index: number,
+  gearSlot: GearSlot
+): number => {
+  return GearSettingsObject.custom[gearSlot][index]
 }
 
-export const getItemId = (gearSettings: GearSettings, gearSlot: GearSlot): number => {
-  return getValue(gearSettings, 0, gearSlot)
+export const getItemId = (GearSettingsObject: GearSettingsObject, gearSlot: GearSlot): number => {
+  return getValue(GearSettingsObject, 0, gearSlot)
 }
 
-export const getSuffixId = (gearSettings: GearSettings, gearSlot: GearSlot): number => {
-  return getValue(gearSettings, 1, gearSlot)
+export const getSuffixId = (GearSettingsObject: GearSettingsObject, gearSlot: GearSlot): number => {
+  return getValue(GearSettingsObject, 1, gearSlot)
 }
 
-export const getEnchantId = (gearSettings: GearSettings, gearSlot: GearSlot): number => {
-  return getValue(gearSettings, 2, gearSlot)
+export const getEnchantId = (
+  GearSettingsObject: GearSettingsObject,
+  gearSlot: GearSlot
+): number => {
+  return getValue(GearSettingsObject, 2, gearSlot)
 }

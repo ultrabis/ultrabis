@@ -1,5 +1,4 @@
-/* these represent the indexes of the gear array in settings and encounter results */
-/* some slots (relic, ranged, quiver) might be empty depending on class and phase */
+/* these represent the indexes of the customGear array */
 enum GearSlot {
   Head,
   Hands,
@@ -17,9 +16,7 @@ enum GearSlot {
   Offhand,
   Trinket,
   Trinket2,
-  Relic,
-  Ranged,
-  Quiver
+  Ranged
 }
 
 export default GearSlot

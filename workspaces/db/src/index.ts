@@ -1,4 +1,4 @@
-export * as DBFull from './full'
+export * as DB from './full'
 export * as DBFeral from './feral'
 export * as DBMage from './mage'
 export * as DBMoonkin from './moonkin'
