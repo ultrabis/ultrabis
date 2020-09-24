@@ -1,25 +1,41 @@
 /**
  *
- * There's a dumb little naming scheme. Using the `Item` concept for example:
+ * Interfaces are affixed with a word describing their usage, primarily to prevent naming conflicts.
+ * A name with no affix is reserved for UI components e.g. `Item`
  *
- * ItemRecord = interface describing the row in the database table. we call it
- *              a database record, but it's really a single array member from
- *              the .json files in '@ultrabis/db'
+ * -Query    options used to query records in a database.
+ * -Record   record in a database.
+ * -Entity   higher level object, typically extending a Record.
+ * -Object   misc object. TBD.
  *
- * ItemObject = interface describing a higher level object. this object extends
- *              ItemRecord and includes additional values derived at run-time.
- *              e.g. 'score'
+ *****************************************************************************************************
  *
- * Item       = the UI component, which takes ItemObject as input
+ * Of particular note is the distinguishment between Record and Entity.
+ * Records are read-only and Entities are read-write. Records should be kept
+ * low-level and away from the user i.e. never passed to a component.
+ *
+ * Why? Consider putting the calculated property `score` on ItemRecord.
+ * So we do a query of items and assign a `score` to each record. Then we
+ * later do a unrelated query of item records; low and behold the item records
+ * still contain the `score` values assigned from the previous query. This is
+ * because javascript handles these records as references, not unique values.
  *
  */
 
-// database record objects
+// Item
+export { default as ItemQuery } from './interfaces/ItemQuery'
 export { default as ItemRecord } from './interfaces/ItemRecord'
-export { default as EnchantRecord } from './interfaces/EnchantRecord'
+export { default as ItemEntity } from './interfaces/ItemEntity'
+
+// ItemSuffix
+export { default as ItemSuffixQuery } from './interfaces/ItemSuffixQuery'
 export { default as ItemSuffixRecord } from './interfaces/ItemSuffixRecord'
+
+// Enchant
+export { default as EnchantRecord } from './interfaces/EnchantRecord'
+
+// ItemList
 export { default as ItemListRecord } from './interfaces/ItemListRecord'
 
-// higher level objects
-export { default as ItemObject } from './interfaces/ItemObject'
+// Misc
 export { default as GearSettingsObject } from './interfaces/GearSettingsObject'

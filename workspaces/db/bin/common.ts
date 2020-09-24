@@ -674,10 +674,7 @@ export const wowheadParseItems = async (
   opts?: { validSuffixTypes?: number[] }
 ): Promise<WowheadItemParserResult[]> => {
   const limit = plimit(10)
-  const itemSuffixFile = fileExists(cacheItemSuffixFile)
-    ? cacheItemSuffixFile
-    : masterItemSuffixFile
-  const itemSuffixes: ItemSuffixRecord[] = jsonFromFile(itemSuffixFile)
+  const itemSuffixes: ItemSuffixRecord[] = jsonFromFile(masterItemSuffixFile)
   const parsePromises: Promise<WowheadItemParserResult>[] = []
 
   const itemList = jsonFromFile(itemListFile)

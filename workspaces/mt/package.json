@@ -10,11 +10,12 @@
     "lib/"
   ],
   "scripts": {
-    "clean": "rimraf lib",
+    "build": "yarn run build:clean && yarn run build:tsc",
+    "test": "yarn run test:integration",
+    "build:clean": "rimraf lib",
+    "build:tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "test:integration": "ts-node -sT __integration__/index.ts",
-    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "build": "yarn run tsc",
-    "prepublishOnly": "yarn run clean && yarn run build"
+    "prepublishOnly": "yarn run build"
   },
   "dependencies": {
     "@ultrabis/common": "0.0.0",

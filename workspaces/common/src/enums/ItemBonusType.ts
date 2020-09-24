@@ -1,4 +1,5 @@
 enum ItemBonusType {
+  Invalid, // FIXME: removing this breaks stuff
   Agility,
   ArcaneResistence,
   ArcaneSpellDamage,

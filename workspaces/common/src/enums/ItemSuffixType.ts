@@ -2,6 +2,7 @@
  * These are all types of 'random enchant' items e.g. some cloak of arcane wrath
  */
 enum ItemSuffixType {
+  Invalid, // FIXME: removing this breaks stuff
   Agility,
   ArcaneResistance,
   ArcaneWrath,
