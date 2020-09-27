@@ -1,4 +1,4 @@
-import { ItemRecord, EnchantRecord } from '@ultrabis/common'
+import { ItemRecord, EnchantRecord } from '@ultrabis/wow-common'
 
 const itemRecord: ItemRecord = {} as ItemRecord
 const enchantRecord: EnchantRecord = {} as EnchantRecord

@@ -1,5 +1,5 @@
 {
-  "name": "@ultrabis/common",
+  "name": "@ultrabis/wow-common",
   "version": "0.0.0",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",

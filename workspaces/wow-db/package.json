@@ -1,5 +1,5 @@
 {
-  "name": "@ultrabis/db",
+  "name": "@ultrabis/wow-db",
   "version": "0.0.0",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "@ultrabis/util": "0.0.0",
-    "@ultrabis/common": "0.0.0"
+    "@ultrabis/wow-common": "0.0.0"
   }
 }

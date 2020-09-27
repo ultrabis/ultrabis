@@ -32,7 +32,7 @@ import {
   playableClassesFromText
 } from '@ultrabis/common'
 
-import { affixItemRecord } from '@ultrabis/mt'
+import { affixItemRecord } from '@ultrabis/wow-mt'
 
 interface WowheadItemParserResult {
   item: ItemRecord

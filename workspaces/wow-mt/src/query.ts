@@ -6,7 +6,7 @@ import {
   ItemSuffixType,
   itemBaseName,
   itemNameIsRandomEnchant
-} from '@ultrabis/common'
+} from '@ultrabis/wow-common'
 
 import {
   affixItemRecord,

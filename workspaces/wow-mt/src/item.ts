@@ -1,5 +1,5 @@
 import { cloneObject, fuzzyEquals, fuzzyIncludes } from '@ultrabis/util'
-import { ItemRecord, ItemSuffixRecord, ItemBonusType, ItemSuffixType } from '@ultrabis/common'
+import { ItemRecord, ItemSuffixRecord, ItemBonusType, ItemSuffixType } from '@ultrabis/wow-common'
 
 /* TODO: some dumb method we're not exporting */
 const zsum = (one: number | undefined, two: number | undefined): number | undefined => {

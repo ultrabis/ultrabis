@@ -1,5 +1,5 @@
 import { fuzzyEquals, cloneObject } from '@ultrabis/util'
-import { DB } from '@ultrabis/db'
+import { DB } from '@ultrabis/wow-db'
 import { queryItem } from '../src'
 
 const result = queryItem(DB.item, DB.itemSuffix, { name: 'arcane', partialMatches: true })

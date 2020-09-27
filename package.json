@@ -18,7 +18,6 @@
     "@types/mathjs": "^6.0.5",
     "@types/mkdirp": "^1.0.1",
     "@types/node": "^14.10.0",
-    "@types/p-limit": "^2.2.0",
     "@types/pako": "^1.0.1",
     "@types/requestretry": "^1.12.7",
     "@types/rimraf": "^3.0.0",
@@ -27,17 +26,12 @@
     "@ultrabis/eslint-config": "^0.0.0",
     "@ultrabis/prettier-config": "^0.0.0",
     "@ultrabis/tsconfig": "^0.0.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-typescript": "^5.0.2",
     "cheerio": "^1.0.0-rc.3",
     "csvtojson": "^2.0.10",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-vue": "^6.2.2",
     "filesize": "^6.1.0",
     "jest": "^26.4.2",
     "lerna": "^3.22.1",
@@ -51,7 +45,6 @@
     "ts-loader": "^8.0.3",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.1",
-    "typescript": "~4.0.3",
-    "vue-template-compiler": "^2.6.11"
+    "typescript": "~4.0.3"
   }
 }

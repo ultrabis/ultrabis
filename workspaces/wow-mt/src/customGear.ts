@@ -14,7 +14,7 @@
  *
  */
 
-import { GearSettingsObject, GearSlot, CustomGearIndex, CustomGearValue } from '@ultrabis/common'
+import { GearSettingsObject, GearSlot, CustomGearIndex, CustomGearValue } from '@ultrabis/wow-common'
 
 /**
  *

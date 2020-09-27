@@ -1,4 +1,4 @@
-import { DB } from '@ultrabis/db'
+import { DB } from '@ultrabis/wow-db'
 import { jsonToFile } from '@ultrabis/util'
 import { queryItem } from '../src'
 

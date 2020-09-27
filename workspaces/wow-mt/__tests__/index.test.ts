@@ -3,7 +3,7 @@
 
 import * as mt from '../src/index'
 import { jsonFromFile } from '@ultrabis/util'
-import { DB } from '@ultrabis/db'
+import { DB } from '@ultrabis/wow-db'
 
 test('test case 1: query item by id (normal item)', () => {
   expect(jsonFromFile(`./__tests__/test-case-1.json`)).toStrictEqual(

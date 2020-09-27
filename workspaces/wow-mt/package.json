@@ -1,5 +1,5 @@
 {
-  "name": "@ultrabis/mt",
+  "name": "@ultrabis/wow-mt",
   "version": "0.0.0",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -20,7 +20,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@ultrabis/common": "0.0.0",
-    "@ultrabis/util": "0.0.0"
+    "@ultrabis/util": "0.0.0",
+    "@ultrabis/wow-common": "0.0.0"
   }
 }
