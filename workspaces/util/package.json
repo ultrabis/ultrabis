@@ -10,10 +10,12 @@
     "lib/"
   ],
   "scripts": {
-    "clean": "rimraf lib",
-    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "build": "yarn run tsc",
-    "prepublishOnly": "yarn run clean && yarn run build"
+    "build": "yarn build:clean && yarn build:tsc",
+    "build:clean": "rimraf lib",
+    "build:tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "test": "yarn build && yarn test:unit",
+    "test:unit": "yarn run jest",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "js-base64": "^3.5.2",

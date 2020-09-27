@@ -674,10 +674,10 @@ export const wowheadParseItems = async (
   opts?: { validSuffixTypes?: number[] }
 ): Promise<WowheadItemParserResult[]> => {
   const limit = plimit(10)
-  const itemSuffixes: ItemSuffixRecord[] = jsonFromFile(masterItemSuffixFile)
   const parsePromises: Promise<WowheadItemParserResult>[] = []
 
   const itemList = jsonFromFile(itemListFile)
+  const itemSuffixes: ItemSuffixRecord[] = jsonFromFile(masterItemSuffixFile)
   for (let i = 0; i < itemList.length; i++) {
     parsePromises.push(
       limit(() => wowheadParseItem(itemList[i].id, itemList[i].name, itemSuffixes, opts))

@@ -15,10 +15,12 @@
  * low-level and away from the user i.e. never passed to a component.
  *
  * Why? Consider putting the calculated property `score` on ItemRecord.
- * So we do a query of items and assign a `score` to each record. Then we
+ * Say we do a query of items and assign a `score` to each record. Then we
  * later do a unrelated query of item records; low and behold the item records
  * still contain the `score` values assigned from the previous query. This is
  * because javascript handles these records as references, not unique values.
+ * So for this reason it's good to ensure Record object always reflect what's
+ * actually stored in the database.
  *
  */
 

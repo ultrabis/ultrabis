@@ -16,4 +16,7 @@ export default interface ItemQueryObject {
   includeWorldBosses?: boolean
   includeRaids?: boolean
   includeRandomEnchants?: boolean
+
+  // query options
+  partialMatches?: boolean // allow partial matches on query by name
 }

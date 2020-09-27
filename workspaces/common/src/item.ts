@@ -44,3 +44,13 @@ export const itemBaseName = (itemName: string): string => {
   const of = itemName.toUpperCase().indexOf(' OF ')
   return itemName.slice(0, of)
 }
+
+/**
+ * 
+ * Does this item name indicate that it's a random enchant?
+ * 
+ * @param itemName 
+ */
+export const itemNameIsRandomEnchant = (itemName: string): boolean => {
+  return itemSuffixTypeFromName(itemName) !== undefined
+}

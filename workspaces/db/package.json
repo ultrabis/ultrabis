@@ -7,11 +7,11 @@
   "license": "MIT",
   "prettier": "@ultrabis/prettier-config",
   "scripts": {
+    "build": "yarn build:clean && yarn build:tsc",
     "build:cache": "ts-node -sT bin/build-cache.ts",
     "build:db": "ts-node -sT bin/build-db.ts",
     "build:tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "build:clean": "rimraf lib",
-    "test:integration": "ts-node -sT __integration__/index.ts",
     "prepublishOnly": "yarn run clean && yarn run build:tsc"
   },
   "dependencies": {

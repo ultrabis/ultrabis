@@ -95,7 +95,7 @@ export const jsonFromFile = (filePath: string): any => {
  * @param filePath
  * @param myJSON
  */
-export const jsonToFile = (filePath: string, myJSON: object): void => {
+export const jsonToFile = (filePath: string, myJSON: any): void => {
   return stringToFile(filePath, JSON.stringify(myJSON))
 }
 

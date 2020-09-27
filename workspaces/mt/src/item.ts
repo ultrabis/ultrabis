@@ -1,4 +1,4 @@
-import { cloneObject } from '@ultrabis/util'
+import { cloneObject, fuzzyEquals, fuzzyIncludes } from '@ultrabis/util'
 import { ItemRecord, ItemSuffixRecord, ItemBonusType, ItemSuffixType } from '@ultrabis/common'
 
 /* TODO: some dumb method we're not exporting */
@@ -7,11 +7,97 @@ const zsum = (one: number | undefined, two: number | undefined): number | undefi
   return val ? val : undefined
 }
 
+export const itemRecordsFilterByName = (
+  itemRecords: ItemRecord[],
+  itemName: string
+): ItemRecord[] => {
+  return itemRecords.filter((itemRecord: ItemRecord) => {
+    return fuzzyEquals(itemRecord.name, itemName)
+  })
+}
+
+export const itemRecordsFilterByPartialName = (
+  itemRecords: ItemRecord[],
+  itemName: string
+): ItemRecord[] => {
+  return itemRecords.filter((itemRecord: ItemRecord) => {
+    return fuzzyIncludes(itemRecord.name, itemName)
+  })
+}
+
+export const itemRecordsFindByName = (
+  itemRecords: ItemRecord[],
+  itemName: string
+): ItemRecord | undefined => {
+  return itemRecords.find((itemRecord: ItemRecord) => {
+    return fuzzyEquals(itemRecord.name, itemName)
+  })
+}
+
+export const itemRecordsFindById = (
+  itemRecords: ItemRecord[],
+  itemId: number
+): ItemRecord | undefined => {
+  return itemRecords.find((itemRecord: ItemRecord) => {
+    return itemRecord.id == itemId
+  })
+}
+
 /**
  *
- * Returns a 'random enchant' item record based on the base item and item suffix records.
- * This is used to support random enchant items in the 'modular' database.
- * Using this method saves a crapload of space vs storing each individual item.
+ * Is this a base item? A base item is the root item for a set of random enchants
+ * e.g. Master's Hat
+ *
+ * @param itemRecord
+ */
+export const itemRecordIsBase = (itemRecord: ItemRecord | undefined): boolean => {
+  return (
+    itemRecord !== undefined &&
+    itemRecord.validSuffixIds !== undefined &&
+    itemRecord.validSuffixIds.length > 0
+  )
+}
+
+/**
+ *
+ * Converts a base item record (e.g. Master's Hat) to an array of
+ * item records of all possible random enchants. If a non-base item
+ * is passed in it's returned without changes. This means any item
+ * can be passed into this function, and the correct results will be
+ * returned.
+ *
+ * @param baseItemRecord
+ * @param itemSuffixRecords
+ */
+export const itemRecordsFromBase = (
+  baseItemRecord: ItemRecord,
+  itemSuffixRecords: ItemSuffixRecord[]
+): ItemRecord[] => {
+  const myItemRecords = [] as ItemRecord[]
+
+  // this isn't a base item record. so just return it.
+  if (!baseItemRecord.validSuffixIds || !baseItemRecord.validSuffixIds.length) {
+    return [baseItemRecord]
+  }
+
+  // loop through valid suffix id's and push affixed item records to myItemRecord
+  for (const suffixId of baseItemRecord.validSuffixIds) {
+    const mySuffixRecord = itemSuffixRecords.find((rec: ItemSuffixRecord) => {
+      return rec.id === suffixId
+    })
+
+    if (mySuffixRecord) {
+      myItemRecords.push(affixItemRecord(baseItemRecord, mySuffixRecord))
+    }
+  }
+
+  return myItemRecords
+}
+
+/**
+ *
+ * Returns a 'random enchant' item record.
+ * Derived from the base item record and item suffix record.
  *
  * @param baseItemRecord e.g. Master's Hat
  * @param itemSuffixRecord contains the suffix type e.g. 'Arcane Wrath' and bonus values
@@ -287,5 +373,9 @@ export const affixItemRecord = (
       itemRecord.name = `${itemRecord.name} of Twain`
       break
   }
-  return itemRecord
+
+  // this is probably dumb...but we're stringifying/parsing
+  // as JSON to strip any undefined's from the record. leaving
+  // them in breaks the test cases.
+  return JSON.parse(JSON.stringify(itemRecord))
 }

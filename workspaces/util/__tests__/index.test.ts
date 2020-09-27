@@ -57,3 +57,12 @@ test('paramins', () => {
   expect(util.paraminFromValue(paraminValue)).toBe(paramin)
   expect(util.paraminToValue(paramin)).toBe(paraminValue)
 })
+
+test('isEqual', () => {
+  const obj1 = [ { foo: 1, bar: 'howdy' }, { foo: 2, bar: 'there' } ]
+  const obj2 = [ { foo: 1, bar: 'howdy' }, { foo: 2, bar: 'there' } ]
+  const obj3 = [ { foo: 2, bar: 'howdy' }, { foo: 3, bar: 'there' } ]
+
+  expect(util.isEqual(obj1, obj2)).toBe(true)
+  expect(util.isEqual(obj1, obj3)).toBe(false)
+})

@@ -1,12 +1,20 @@
 /**
- * Returns cloned object `o`.
- *
- * This is a ghetto version of underscores `clonedeep`
+ * Returns cloned object `o`. Ghetto version of lodash `clonedeep`.
  *
  * @param o
  */
 export const cloneObject = (o: object): any => {
   return JSON.parse(JSON.stringify(o, null, 1))
+}
+
+/**
+ *
+ *
+ * Compare two objects. Ghetto version of lodash `isEqual`
+ *
+ */
+export const isEqual = (o1: any, o2: any): boolean => {
+  return JSON.stringify(o1) === JSON.stringify(o2)
 }
 
 /**
