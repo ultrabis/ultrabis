@@ -1,46 +1,10 @@
-import { cloneObject, fuzzyEquals, fuzzyIncludes } from '@ultrabis/util'
+//import { cloneObject } from '@ultrabis/util'
 import { ItemRecord, ItemSuffixRecord, ItemBonusType, ItemSuffixType } from '@ultrabis/wow-common'
 
 /* TODO: some dumb method we're not exporting */
 const zsum = (one: number | undefined, two: number | undefined): number | undefined => {
   const val = (one ? one : 0) + (two ? two : 0)
   return val ? val : undefined
-}
-
-export const itemRecordsFilterByName = (
-  itemRecords: ItemRecord[],
-  itemName: string
-): ItemRecord[] => {
-  return itemRecords.filter((itemRecord: ItemRecord) => {
-    return fuzzyEquals(itemRecord.name, itemName)
-  })
-}
-
-export const itemRecordsFilterByPartialName = (
-  itemRecords: ItemRecord[],
-  itemName: string
-): ItemRecord[] => {
-  return itemRecords.filter((itemRecord: ItemRecord) => {
-    return fuzzyIncludes(itemRecord.name, itemName)
-  })
-}
-
-export const itemRecordsFindByName = (
-  itemRecords: ItemRecord[],
-  itemName: string
-): ItemRecord | undefined => {
-  return itemRecords.find((itemRecord: ItemRecord) => {
-    return fuzzyEquals(itemRecord.name, itemName)
-  })
-}
-
-export const itemRecordsFindById = (
-  itemRecords: ItemRecord[],
-  itemId: number
-): ItemRecord | undefined => {
-  return itemRecords.find((itemRecord: ItemRecord) => {
-    return itemRecord.id == itemId
-  })
 }
 
 /**
@@ -87,7 +51,7 @@ export const itemRecordsFromBase = (
     })
 
     if (mySuffixRecord) {
-      myItemRecords.push(affixItemRecord(baseItemRecord, mySuffixRecord))
+      myItemRecords.push(itemRecordAffix(baseItemRecord, mySuffixRecord))
     }
   }
 
@@ -96,17 +60,17 @@ export const itemRecordsFromBase = (
 
 /**
  *
- * Returns a 'random enchant' item record.
- * Derived from the base item record and item suffix record.
+ * Returns random enchant item by merging base item and item suffix records
  *
  * @param baseItemRecord e.g. Master's Hat
  * @param itemSuffixRecord contains the suffix type e.g. 'Arcane Wrath' and bonus values
  */
-export const affixItemRecord = (
+export const itemRecordAffix = (
   baseItemRecord: ItemRecord,
   itemSuffixRecord: ItemSuffixRecord
 ): ItemRecord => {
-  const itemRecord = cloneObject(baseItemRecord)
+  const itemRecord = {} as ItemRecord
+  Object.assign(itemRecord, baseItemRecord)
 
   // add suffixId and remove validSuffixIds
   itemRecord.validSuffixIds = undefined

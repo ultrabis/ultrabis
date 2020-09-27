@@ -10,6 +10,7 @@ import mkdirp from 'mkdirp'
 
 import {
   dashifyString,
+  bitmaskFromValues,
   stringFromFile,
   stringToFile,
   stringFromGzipFile,
@@ -29,10 +30,10 @@ import {
   itemBaseName,
   itemSuffixTypeFromName,
   pvpRankFromText,
-  playableClassesFromText
-} from '@ultrabis/common'
+  classesMaskFromText
+} from '@ultrabis/wow-common'
 
-import { affixItemRecord } from '@ultrabis/wow-mt'
+import { itemRecordAffix } from '@ultrabis/wow-mt'
 
 interface WowheadItemParserResult {
   item: ItemRecord
@@ -512,19 +513,19 @@ export const wowheadParseItem = async (
   ItemRecord.unique = btob(ttText.includes(`>Unique<`))
   ItemRecord.bop = btob(stringFromComment(ttText, 'bo') === `Binds when picked up`)
   if (ttText.includes('Undead and Demons')) {
-    ItemRecord.targetMask = TargetType.Undead | TargetType.Demon
+    ItemRecord.targets = bitmaskFromValues([TargetType.Undead, TargetType.Demon], true).toString()
   } else if (ttText.includes('Increases damage done to Undead')) {
-    ItemRecord.targetMask = TargetType.Undead
+    ItemRecord.targets = bitmaskFromValues([TargetType.Undead], true).toString()
   }
   const tt = cheerio.load(ttText, { xmlMode: true })
   const droppedBy = tt('.whtt-droppedby').text()
   if (droppedBy && droppedBy.length > 0) {
     const n = droppedBy.search(':')
-    ItemRecord.boss = droppedBy.substr(n + 2)
+    ItemRecord.droppedBy = droppedBy.substr(n + 2)
   }
   const classes = tt('.wowhead-tooltip-item-classes').text()
   if (classes && classes.length > 0) {
-    ItemRecord.allowableClasses = playableClassesFromText(classes)
+    ItemRecord.classes = classesMaskFromText(classes).toString()
   }
   tt('span').each(function (i: number, elem: any) {
     const text = tt(elem).text()
@@ -656,7 +657,7 @@ export const wowheadParseItem = async (
       const suffixId = ItemRecord.validSuffixIds[i]
       const ItemSuffixRecord = getItemSuffix(suffixes, suffixId)
       if (ItemSuffixRecord) {
-        output.randomEnchants.push(affixItemRecord(ItemRecord, ItemSuffixRecord))
+        output.randomEnchants.push(itemRecordAffix(ItemRecord, ItemSuffixRecord))
         output.suffixes.push(ItemSuffixRecord)
       }
     }

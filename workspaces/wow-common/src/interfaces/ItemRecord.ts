@@ -17,15 +17,15 @@ export default interface ItemRecord {
   icon?: string
   flavor?: string
   dropChance?: number
+  droppedBy?: string
 
   // requirements
   reqLevel?: number
   phase?: number
   faction?: number
-  allowableClasses?: number[]
+  classes?: string
   pvpRank?: number
-  targetMask?: number
-  boss?: string
+  targets?: string
 
   // base stats
   strength?: number

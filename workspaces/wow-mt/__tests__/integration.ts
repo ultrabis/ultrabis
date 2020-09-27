@@ -2,14 +2,17 @@ import { fuzzyEquals, cloneObject } from '@ultrabis/util'
 import { DB } from '@ultrabis/wow-db'
 import { queryItem } from '../src'
 
-const result = queryItem(DB.item, DB.itemSuffix, { name: 'arcane', partialMatches: true })
+/*
+const result = queryItem(DB.item, DB.itemSuffix, { name: 'masters hat of arcane wrath' })
+console.log(result)
+*/
 
+/*
+const result = queryItem(DB.item, DB.itemSuffix, { partialName: 'arcane' })
 for (const x of result) {
   console.log(x.name)
 }
-
-/*
- */
+*/
 
 /*
 const findItemRecordsByName = (itemRecords: ItemRecord[], itemName: string): ItemRecord[] => {

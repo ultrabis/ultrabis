@@ -4,103 +4,117 @@ import {
   ItemSuffixQuery,
   ItemSuffixRecord,
   ItemSuffixType,
+  ItemBonusType,
   itemBaseName,
   itemNameIsRandomEnchant
 } from '@ultrabis/wow-common'
 
-import {
-  affixItemRecord,
-  itemRecordsFromBase,
-  itemRecordsFilterByName,
-  itemRecordsFilterByPartialName,
-  itemRecordsFindByName,
-  itemRecordsFindById,
-  itemRecordIsBase
-} from './item'
+import { itemRecordAffix, itemRecordsFromBase, itemRecordIsBase } from './item'
 
-import { enumKeys, enumValuesFromKeys, fuzzyIncludes } from '@ultrabis/util'
+import * as filter from './filter'
+
+import { enumKeys, enumValuesFromKeys, fuzzyIncludes, fuzzyEquals } from '@ultrabis/util'
 
 export const queryItemSuffix = (
   itemSuffixRecords: ItemSuffixRecord[],
   opts: ItemSuffixQuery
 ): ItemSuffixRecord[] => {
   if (opts.id) {
-    // simple id lookup
-    return itemSuffixRecords.filter((rec: ItemSuffixRecord) => {
-      return rec.id === opts.id
-    })
+    return queryItemSuffixById(itemSuffixRecords, opts.id)
+  } else if (opts.type) {
+    return queryItemSuffixByType(itemSuffixRecords, opts.type)
+  } else if (opts.name) {
+    return queryItemSuffixByName(itemSuffixRecords, opts.name)
+  } else if (opts.partialName) {
+    return queryItemSuffixByPartialName(itemSuffixRecords, opts.partialName)
   }
 
   return []
 }
 
-export const queryItemByName = (
-  itemRecords: ItemRecord[],
+export const queryItemSuffixById = (
   itemSuffixRecords: ItemSuffixRecord[],
-  itemName: string
-): ItemRecord[] => {
-  if (itemNameIsRandomEnchant(itemName)) {
-    // find the base item, grab all it's random enchants, then filter by name
-    const base = itemRecordsFindByName(itemRecords, itemBaseName(itemName))
-    if (!base) {
-      return []
-    }
-
-    const recs = queryItem(itemRecords, itemSuffixRecords, { id: base.id })
-    if (!recs.length) {
-      return []
-    }
-
-    return itemRecordsFilterByName(recs, itemName)
-  }
-
-  // standard non-random-echant ite
-  return itemRecordsFilterByName(itemRecords, itemName)
+  id: number
+): ItemSuffixRecord[] => {
+  return filter.itemSuffixRecordsById(itemSuffixRecords, id)
 }
 
-export const queryItemByPartialName = (
-  itemRecords: ItemRecord[],
+export const queryItemSuffixByType = (
   itemSuffixRecords: ItemSuffixRecord[],
-  partialName: string
-): ItemRecord[] => {
-  const items = [] as ItemRecord[]
+  type: ItemSuffixType
+): ItemSuffixRecord[] => {
+  return filter.itemSuffixRecordsByType(itemSuffixRecords, type)
+}
 
-  /////////////////////////////////////////////////////////////////
-  // first handle basic search of item names
-  /////////////////////////////////////////////////////////////////
+export const queryItemSuffixByBonusType = (
+  itemSuffixRecords: ItemSuffixRecord[],
+  bonusType: ItemBonusType
+): ItemSuffixRecord[] => {
+  return filter.itemSuffixRecordsByBonusType(itemSuffixRecords, bonusType)
+}
 
-  const basicItems = itemRecordsFilterByPartialName(itemRecords, partialName)
-  for (const basicItem of basicItems) {
-    items.push(...itemRecordsFromBase(basicItem, itemSuffixRecords))
-  }
-
-  /////////////////////////////////////////////////////////////////
-  // now handle search of random enchant item names
-  /////////////////////////////////////////////////////////////////
-
-  // 1. get suffix records where type matches 'partialName' e.g. 'Arcane Wrath'
-  const suffixTypeNames = enumKeys(ItemSuffixType).filter((k) => {
-    return fuzzyIncludes(k, partialName.replace(/of /g, ''))
-  })
-  const suffixTypeValues = enumValuesFromKeys(ItemSuffixType, suffixTypeNames)
-  const suffixRecords = itemSuffixRecords.filter((rec) => {
-    return suffixTypeValues.includes(rec.type)
-  })
-  console.log(`name: ${suffixTypeValues}`)
-
-  // 2. iterate validSuffixId's for each item, pushing any matching
-  // random enchants onto the final array
-  for (const itemRecord of itemRecords) {
-    for (const sid of itemRecord.validSuffixIds ? itemRecord.validSuffixIds : []) {
-      for (const suffixRecord of suffixRecords) {
-        if (suffixRecord.id === sid) {
-          items.push(affixItemRecord(itemRecord, suffixRecord))
-        }
+export const queryItemSuffixByBonusValue = (
+  itemSuffixRecords: ItemSuffixRecord[],
+  bonusValue: number
+): ItemSuffixRecord[] => {
+  return itemSuffixRecords.filter((rec: ItemSuffixRecord) => {
+    for (const b of rec.bonus) {
+      if (b.value === bonusValue) {
+        return true
       }
     }
+    return false
+  })
+}
+
+export const queryItemSuffixByName = (
+  itemSuffixRecords: ItemSuffixRecord[],
+  partialName: string
+): ItemSuffixRecord[] => {
+  const suffixTypeValues = enumValuesFromKeys(
+    ItemSuffixType,
+    enumKeys(ItemSuffixType).filter((k) => {
+      return fuzzyEquals(k, partialName)
+    })
+  )
+
+  return itemSuffixRecords.filter((rec) => {
+    return suffixTypeValues.includes(rec.type)
+  })
+}
+
+export const queryItemSuffixByPartialName = (
+  itemSuffixRecords: ItemSuffixRecord[],
+  partialName: string
+): ItemSuffixRecord[] => {
+  const suffixTypeValues = enumValuesFromKeys(
+    ItemSuffixType,
+    enumKeys(ItemSuffixType).filter((k) => {
+      return fuzzyIncludes(k, partialName.replace(/of /g, ''))
+    })
+  )
+
+  return itemSuffixRecords.filter((rec) => {
+    return suffixTypeValues.includes(rec.type)
+  })
+}
+
+export const queryItem = (
+  itemRecords: ItemRecord[],
+  itemSuffixRecords: ItemSuffixRecord[],
+  opts: ItemQuery
+): ItemRecord[] => {
+  if (opts.id && opts.suffixId) {
+    return queryItemByIdAndSuffixId(itemRecords, itemSuffixRecords, opts.id, opts.suffixId)
+  } else if (opts.id) {
+    return queryItemById(itemRecords, itemSuffixRecords, opts.id)
+  } else if (opts.name) {
+    return queryItemByName(itemRecords, itemSuffixRecords, opts.name)
+  } else if (opts.partialName) {
+    return queryItemByPartialName(itemRecords, itemSuffixRecords, opts.partialName)
   }
 
-  return items
+  return []
 }
 
 export const queryItemById = (
@@ -108,17 +122,16 @@ export const queryItemById = (
   itemSuffixRecords: ItemSuffixRecord[],
   itemId: number
 ): ItemRecord[] => {
-  // look up and return item; if it's a base item return all the enchants
-  const item = itemRecordsFindById(itemRecords, itemId)
-  if (!item) {
-    return []
+  const items = filter.itemRecordsById(itemRecords, itemId)
+  if (!items.length) {
+    return items
   }
 
-  if (itemRecordIsBase(item)) {
-    return itemRecordsFromBase(item, itemSuffixRecords)
+  if (itemRecordIsBase(items[0])) {
+    return itemRecordsFromBase(items[0], itemSuffixRecords)
   }
 
-  return [item]
+  return items
 }
 
 export const queryItemByIdAndSuffixId = (
@@ -131,24 +144,55 @@ export const queryItemByIdAndSuffixId = (
     return rec.id === id && rec.validSuffixIds?.includes(suffixId ? suffixId : 0)
   })
   return item
-    ? [affixItemRecord(item, queryItemSuffix(itemSuffixRecords, { id: suffixId })[0])]
+    ? [itemRecordAffix(item, queryItemSuffix(itemSuffixRecords, { id: suffixId })[0])]
     : []
 }
 
-export const queryItem = (
+export const queryItemByName = (
   itemRecords: ItemRecord[],
   itemSuffixRecords: ItemSuffixRecord[],
-  opts: ItemQuery
+  itemName: string
 ): ItemRecord[] => {
-  if (opts.id && opts.suffixId) {
-    return queryItemByIdAndSuffixId(itemRecords, itemSuffixRecords, opts.id, opts.suffixId)
-  } else if (opts.id) {
-    return queryItemById(itemRecords, itemSuffixRecords, opts.id)
-  } else if (opts.name && opts.partialMatches) {
-    return queryItemByPartialName(itemRecords, itemSuffixRecords, opts.name)
-  } else if (opts.name) {
-    return queryItemByName(itemRecords, itemSuffixRecords, opts.name)
+  if (itemNameIsRandomEnchant(itemName)) {
+    const items = filter.itemRecordsByName(itemRecords, itemBaseName(itemName))
+    if (!items.length) {
+      return items
+    }
+
+    return filter.itemRecordsByName(
+      queryItem(itemRecords, itemSuffixRecords, { id: items[0].id }),
+      itemName
+    )
   }
 
-  return []
+  // standard non-random-echant ite
+  return filter.itemRecordsByName(itemRecords, itemName)
+}
+
+export const queryItemByPartialName = (
+  itemRecords: ItemRecord[],
+  itemSuffixRecords: ItemSuffixRecord[],
+  partialName: string
+): ItemRecord[] => {
+  const items = [] as ItemRecord[]
+
+  // handle search of item names
+  const basicItems = filter.itemRecordsByPartialName(itemRecords, partialName)
+  for (const basicItem of basicItems) {
+    items.push(...itemRecordsFromBase(basicItem, itemSuffixRecords))
+  }
+
+  // handle search of random enchant item names
+  const suffixRecords = queryItemSuffixByPartialName(itemSuffixRecords, partialName)
+  for (const itemRecord of itemRecords) {
+    for (const suffixId of itemRecord.validSuffixIds ? itemRecord.validSuffixIds : []) {
+      for (const suffixRecord of suffixRecords) {
+        if (suffixRecord.id === suffixId) {
+          items.push(itemRecordAffix(itemRecord, suffixRecord))
+        }
+      }
+    }
+  }
+
+  return items
 }

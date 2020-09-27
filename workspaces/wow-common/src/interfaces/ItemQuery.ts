@@ -2,11 +2,11 @@ import ItemSlot from '../enums/ItemSlot'
 import Faction from '../enums/Faction'
 import PvPRank from '../enums/PvPRank'
 
-export default interface ItemQueryObject {
-  // primary identifiers
+export default interface ItemQuery {
   id?: number
   suffixId?: number
   name?: string
+  partialName?: string
   slot?: ItemSlot
 
   // additional filters
@@ -17,6 +17,4 @@ export default interface ItemQueryObject {
   includeRaids?: boolean
   includeRandomEnchants?: boolean
 
-  // query options
-  partialMatches?: boolean // allow partial matches on query by name
 }
