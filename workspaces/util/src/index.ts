@@ -6,3 +6,6 @@ export * from './string'
 export * from './url'
 export * from './misc'
 export * from './node'
+
+export { default as Filter } from './enums/Filter'
+export { default as SortOrder } from './enums/SortOrder'

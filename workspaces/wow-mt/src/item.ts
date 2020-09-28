@@ -1,5 +1,12 @@
-//import { cloneObject } from '@ultrabis/util'
-import { ItemRecord, ItemSuffixRecord, ItemBonusType, ItemSuffixType } from '@ultrabis/wow-common'
+import { enumValueFromKey } from '@ultrabis/util'
+
+import {
+  ItemRecord,
+  ItemSuffixRecord,
+  ItemBonusType,
+  ItemSuffixType,
+  WorldBoss
+} from '@ultrabis/wow-common'
 
 /* TODO: some dumb method we're not exporting */
 const zsum = (one: number | undefined, two: number | undefined): number | undefined => {
@@ -7,6 +14,12 @@ const zsum = (one: number | undefined, two: number | undefined): number | undefi
   return val ? val : undefined
 }
 
+export const droppedByWorldBoss = (itemRecord: ItemRecord | undefined): boolean => {
+  if (itemRecord && itemRecord.droppedBy) {
+    return enumValueFromKey(WorldBoss, itemRecord.droppedBy) !== undefined
+  }
+  return false
+}
 /**
  *
  * Is this a base item? A base item is the root item for a set of random enchants

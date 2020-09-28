@@ -12,7 +12,7 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended'
   ],
-  ignorePatterns: ['tsconfig.json'],
+  ignorePatterns: ['tsconfig.json', '**/lib/**', '**/cache/**', '**/*.json'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

@@ -46,10 +46,10 @@ export const itemBaseName = (itemName: string): string => {
 }
 
 /**
- * 
+ *
  * Does this item name indicate that it's a random enchant?
- * 
- * @param itemName 
+ *
+ * @param itemName
  */
 export const itemNameIsRandomEnchant = (itemName: string): boolean => {
   return itemSuffixTypeFromName(itemName) !== undefined
