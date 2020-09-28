@@ -36,8 +36,12 @@ export { default as ItemSuffixRecord } from './interfaces/ItemSuffixRecord'
 // Enchant
 export { default as EnchantRecord } from './interfaces/EnchantRecord'
 
-// ItemList
-export { default as ItemListRecord } from './interfaces/ItemListRecord'
+// Zone
+export { default as ZoneRecord } from './interfaces/ZoneRecord'
+
+// Target
+export { default as TargetRecord } from './interfaces/TargetRecord'
 
 // Misc
+export { default as ItemListRecord } from './interfaces/ItemListRecord'
 export { default as GearSettingsObject } from './interfaces/GearSettingsObject'

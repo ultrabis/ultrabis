@@ -434,125 +434,130 @@ export const wowheadParseItem = async (
   const override: ItemRecord | undefined =
     dataStrings[2] !== `` ? JSON.parse(dataStrings[2]) : undefined
 
-  const ItemRecord = {} as ItemRecord
-  ItemRecord.id = itemId
+  const itemRecord = {} as ItemRecord
+  itemRecord.id = itemId
 
   // parse xml
   const xml$ = cheerio.load(xml, { xmlMode: true })
   const jsonEquipText = xml$('jsonEquip').text()
   const jsonEquip = JSON.parse(`{ ${jsonEquipText} }`)
-  ItemRecord.name = xml$('name').text()
-  ItemRecord.slot = Number(xml$('inventorySlot').attr('id'))
-  if (ItemRecord.slot === NaN) {
+  itemRecord.name = xml$('name').text()
+  itemRecord.slot = Number(xml$('inventorySlot').attr('id'))
+  if (itemRecord.slot === NaN) {
     console.warn('WARNING: Invalid slot')
   }
-  ItemRecord.icon = xml$('icon').text()
-  ItemRecord.class = atoi(xml$('class').attr('id'))
-  ItemRecord.subclass = atoi(xml$('subclass').attr('id'))
-  ItemRecord.level = atoi(xml$('level').attr('id'))
-  ItemRecord.quality = atoi(xml$('quality').attr('id'))
-  //const droppedBy = tt('.whtt-droppedby').text()
+  itemRecord.icon = xml$('icon').text()
+  itemRecord.class = atoi(xml$('class').attr('id'))
+  itemRecord.subclass = atoi(xml$('subclass').attr('id'))
+  itemRecord.level = atoi(xml$('level').attr('id'))
+  itemRecord.quality = atoi(xml$('quality').attr('id'))
 
   // parse xml jsonEquip object
-  ItemRecord.reqLevel = itoi(jsonEquip.reqlevel, true)
-  ItemRecord.durability = itoi(jsonEquip.dura, true)
+  itemRecord.reqLevel = itoi(jsonEquip.reqlevel, true)
+  itemRecord.durability = itoi(jsonEquip.dura, true)
 
-  ItemRecord.strength = itoi(jsonEquip.str, true)
-  ItemRecord.agility = itoi(jsonEquip.agi, true)
-  ItemRecord.stamina = itoi(jsonEquip.sta, true)
-  ItemRecord.intellect = itoi(jsonEquip.int, true)
-  ItemRecord.spirit = itoi(jsonEquip.spi, true)
-  ItemRecord.hp5 = itoi(jsonEquip.healthrgn, true)
-  ItemRecord.mp5 = itoi(jsonEquip.manargn, true)
+  itemRecord.strength = itoi(jsonEquip.str, true)
+  itemRecord.agility = itoi(jsonEquip.agi, true)
+  itemRecord.stamina = itoi(jsonEquip.sta, true)
+  itemRecord.intellect = itoi(jsonEquip.int, true)
+  itemRecord.spirit = itoi(jsonEquip.spi, true)
+  itemRecord.hp5 = itoi(jsonEquip.healthrgn, true)
+  itemRecord.mp5 = itoi(jsonEquip.manargn, true)
 
-  ItemRecord.armor = itoi(jsonEquip.armor, true)
-  ItemRecord.defense = itoi(jsonEquip.def, true)
-  ItemRecord.dodge = itoi(jsonEquip.dodgepct, true)
-  ItemRecord.parry = itoi(jsonEquip.parrypct, true)
-  ItemRecord.blockChance = itoi(jsonEquip.blockpct, true)
-  ItemRecord.blockValue = itoi(jsonEquip.blockamount, true)
+  itemRecord.armor = itoi(jsonEquip.armor, true)
+  itemRecord.defense = itoi(jsonEquip.def, true)
+  itemRecord.dodge = itoi(jsonEquip.dodgepct, true)
+  itemRecord.parry = itoi(jsonEquip.parrypct, true)
+  itemRecord.blockChance = itoi(jsonEquip.blockpct, true)
+  itemRecord.blockValue = itoi(jsonEquip.blockamount, true)
 
-  ItemRecord.meleeHit = itoi(jsonEquip.mlehitpct, true)
-  ItemRecord.rangedHit = itoi(jsonEquip.rgdhitpct, true)
-  ItemRecord.spellHit = itoi(jsonEquip.splhitpct, true)
-  ItemRecord.meleeCrit = itoi(jsonEquip.mlecritstrkpct, true)
-  ItemRecord.rangedCrit = itoi(jsonEquip.rgdcritstrkpct, true)
-  ItemRecord.spellCrit = itoi(jsonEquip.splcritstrkpct, true)
-  ItemRecord.attackPower = itoi(jsonEquip.atkpwr, true)
-  ItemRecord.feralAttackPower = itoi(jsonEquip.feratkpwr, true)
-  ItemRecord.meleeAttackPower = itoi(jsonEquip.mleatkpwr, true)
-  ItemRecord.rangedAttackPower = itoi(jsonEquip.rgdatkpwr)
-  ItemRecord.spellPenetration = itoi(jsonEquip.splpen, true)
-  ItemRecord.spellHealing = itoi(jsonEquip.splheal, true)
-  ItemRecord.spellDamage = itoi(jsonEquip.splpwr, true)
-  ItemRecord.arcaneDamage = itoi(jsonEquip.arcsplpwr, true)
-  ItemRecord.fireDamage = itoi(jsonEquip.firsplpwr, true)
-  ItemRecord.frostDamage = itoi(jsonEquip.frosplpwr, true)
-  ItemRecord.natureDamage = itoi(jsonEquip.natsplpwr, true)
-  ItemRecord.shadowDamage = itoi(jsonEquip.shasplpwr, true)
-  ItemRecord.holyDamage = itoi(jsonEquip.holsplpwr, true)
+  itemRecord.meleeHit = itoi(jsonEquip.mlehitpct, true)
+  itemRecord.rangedHit = itoi(jsonEquip.rgdhitpct, true)
+  itemRecord.spellHit = itoi(jsonEquip.splhitpct, true)
+  itemRecord.meleeCrit = itoi(jsonEquip.mlecritstrkpct, true)
+  itemRecord.rangedCrit = itoi(jsonEquip.rgdcritstrkpct, true)
+  itemRecord.spellCrit = itoi(jsonEquip.splcritstrkpct, true)
+  itemRecord.attackPower = itoi(jsonEquip.atkpwr, true)
+  itemRecord.feralAttackPower = itoi(jsonEquip.feratkpwr, true)
+  itemRecord.meleeAttackPower = itoi(jsonEquip.mleatkpwr, true)
+  itemRecord.rangedAttackPower = itoi(jsonEquip.rgdatkpwr)
+  itemRecord.spellPenetration = itoi(jsonEquip.splpen, true)
+  itemRecord.spellHealing = itoi(jsonEquip.splheal, true)
+  itemRecord.spellDamage = itoi(jsonEquip.splpwr, true)
+  itemRecord.arcaneDamage = itoi(jsonEquip.arcsplpwr, true)
+  itemRecord.fireDamage = itoi(jsonEquip.firsplpwr, true)
+  itemRecord.frostDamage = itoi(jsonEquip.frosplpwr, true)
+  itemRecord.natureDamage = itoi(jsonEquip.natsplpwr, true)
+  itemRecord.shadowDamage = itoi(jsonEquip.shasplpwr, true)
+  itemRecord.holyDamage = itoi(jsonEquip.holsplpwr, true)
 
-  ItemRecord.rangedDps = itoi(jsonEquip.rgddps, true)
-  ItemRecord.meleeDps = itoi(jsonEquip.mledps, true)
-  ItemRecord.rangedSpeed = itoi(jsonEquip.rgdspeed, true)
-  ItemRecord.meleeSpeed = itoi(jsonEquip.mlespeed, true)
-  ItemRecord.rangedMinDmg = itoi(jsonEquip.rgddmgmin, true)
-  ItemRecord.meleeMinDmg = itoi(jsonEquip.mledmgmin, true)
-  ItemRecord.rangedMaxDmg = itoi(jsonEquip.rgddmgmax, true)
-  ItemRecord.meleeMaxDmg = itoi(jsonEquip.mledmgmax, true)
+  itemRecord.rangedDps = itoi(jsonEquip.rgddps, true)
+  itemRecord.meleeDps = itoi(jsonEquip.mledps, true)
+  itemRecord.rangedSpeed = itoi(jsonEquip.rgdspeed, true)
+  itemRecord.meleeSpeed = itoi(jsonEquip.mlespeed, true)
+  itemRecord.rangedMinDmg = itoi(jsonEquip.rgddmgmin, true)
+  itemRecord.meleeMinDmg = itoi(jsonEquip.mledmgmin, true)
+  itemRecord.rangedMaxDmg = itoi(jsonEquip.rgddmgmax, true)
+  itemRecord.meleeMaxDmg = itoi(jsonEquip.mledmgmax, true)
 
-  ItemRecord.arcaneResistance = itoi(jsonEquip.arcres, true)
-  ItemRecord.fireResistance = itoi(jsonEquip.firres, true)
-  ItemRecord.frostResistance = itoi(jsonEquip.frores, true)
-  ItemRecord.natureResistance = itoi(jsonEquip.natres, true)
-  ItemRecord.shadowResistance = itoi(jsonEquip.shares, true)
+  itemRecord.arcaneResistance = itoi(jsonEquip.arcres, true)
+  itemRecord.fireResistance = itoi(jsonEquip.firres, true)
+  itemRecord.frostResistance = itoi(jsonEquip.frores, true)
+  itemRecord.natureResistance = itoi(jsonEquip.natres, true)
+  itemRecord.shadowResistance = itoi(jsonEquip.shares, true)
 
   // parse xml tooltip
   const ttText = xml$('htmlTooltip').text()
   const isRandomEnchant = ttText.includes('Random enchant')
-  ItemRecord.unique = btob(ttText.includes(`>Unique<`))
-  ItemRecord.bop = btob(stringFromComment(ttText, 'bo') === `Binds when picked up`)
+  itemRecord.unique = btob(ttText.includes(`>Unique<`))
+  itemRecord.bop = btob(stringFromComment(ttText, 'bo') === `Binds when picked up`)
   if (ttText.includes('Undead and Demons')) {
-    ItemRecord.targets = bitmaskFromValues([TargetType.Undead, TargetType.Demon], true).toString()
+    itemRecord.targets = bitmaskFromValues([TargetType.Undead, TargetType.Demon], true).toString()
   } else if (ttText.includes('Increases damage done to Undead')) {
-    ItemRecord.targets = bitmaskFromValues([TargetType.Undead], true).toString()
+    itemRecord.targets = bitmaskFromValues([TargetType.Undead], true).toString()
   }
   const tt = cheerio.load(ttText, { xmlMode: true })
   const droppedBy = tt('.whtt-droppedby').text()
   if (droppedBy && droppedBy.length > 0) {
     const n = droppedBy.search(':')
-    ItemRecord.droppedBy = droppedBy.substr(n + 2)
+    itemRecord.droppedBy = droppedBy.substr(n + 2)
   }
   const classes = tt('.wowhead-tooltip-item-classes').text()
   if (classes && classes.length > 0) {
-    ItemRecord.classes = classesMaskFromText(classes).toString()
+    itemRecord.classes = classesMaskFromText(classes).toString()
   }
   tt('span').each(function (i: number, elem: any) {
     const text = tt(elem).text()
     if (text[0] === `"` && text[text.length - 1] === `"`) {
-      ItemRecord.flavor = text
+      itemRecord.flavor = text
     }
   })
   const iconHorde = atoa(tt('.icon-horde').text())
   const iconAlliance = atoa(tt('.icon-alliance').text())
   if (iconHorde) {
-    ItemRecord.pvpRank = pvpRankFromText(iconHorde)
+    itemRecord.pvpRank = pvpRankFromText(iconHorde)
   } else if (iconAlliance) {
-    ItemRecord.pvpRank = pvpRankFromText(iconAlliance)
+    itemRecord.pvpRank = pvpRankFromText(iconAlliance)
   }
 
   // parse xml json object
-  //const jsonText = xml$('json').text()
-  //const json = JSON.parse(`{ ${jsonText} }`)
+  const jsonText = xml$('json').text()
+  const json = JSON.parse(`{ ${jsonText} }`)
+  if (json.sourcemore && json.sourcemore[0] && json.sourcemore[0].z) {
+    itemRecord.droppedAt = json.sourcemore[0].z
+  }
 
   // parse html
   const html$ = cheerio.load(html)
   const n = html.search('WH.markup.printHtml')
   const x = html.substr(n)
   const n2 = x.search('Added in content phase')
-  ItemRecord.phase = Number(x.substr(n2 + 23, 1))
-  if (!ItemRecord.phase || ItemRecord.phase === null || ItemRecord.phase === NaN) {
-    ItemRecord.phase = 1
+
+  // just ignore phase if it's 1, null, etc.
+  // we'll save space by assuming undefined is phase 1 on read
+  const phase = Number(x.substr(n2 + 23, 1))
+  if (phase && phase !== null && phase !== NaN && phase > 1) {
+    itemRecord.phase = phase
   }
 
   // faction requirement...grr
@@ -642,29 +647,29 @@ export const wowheadParseItem = async (
         }
       })
     if (validSuffixIds.length > 0) {
-      ItemRecord.validSuffixIds = validSuffixIds
+      itemRecord.validSuffixIds = validSuffixIds
     }
   }
 
   // copy item as is to output
-  output.item = ItemRecord
+  output.item = itemRecord
 
   // now generate each random enchant
-  if (ItemRecord.validSuffixIds && ItemRecord.validSuffixIds.length > 0) {
+  if (itemRecord.validSuffixIds && itemRecord.validSuffixIds.length > 0) {
     output.randomEnchants = []
     output.suffixes = []
-    for (let i = 0; i < ItemRecord.validSuffixIds.length; i++) {
-      const suffixId = ItemRecord.validSuffixIds[i]
+    for (let i = 0; i < itemRecord.validSuffixIds.length; i++) {
+      const suffixId = itemRecord.validSuffixIds[i]
       const ItemSuffixRecord = getItemSuffix(suffixes, suffixId)
       if (ItemSuffixRecord) {
-        output.randomEnchants.push(itemRecordAffix(ItemRecord, ItemSuffixRecord))
+        output.randomEnchants.push(itemRecordAffix(itemRecord, ItemSuffixRecord))
         output.suffixes.push(ItemSuffixRecord)
       }
     }
   }
 
   if (override) {
-    Object.assign(ItemRecord, override)
+    Object.assign(itemRecord, override)
   }
 
   return output

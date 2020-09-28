@@ -17,7 +17,8 @@ export default interface ItemRecord {
   icon?: string
   flavor?: string
   dropChance?: number
-  droppedBy?: string
+  droppedBy?: string // target name
+  droppedAt?: number // zone id
 
   // requirements
   reqLevel?: number
