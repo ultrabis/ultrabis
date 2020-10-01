@@ -1,3 +1,7 @@
+/**
+ * Zones classified as battlegrounds
+ */
+
 enum Battleground {
   WarsongGulch,
   ArathiBasin,

@@ -6,10 +6,10 @@ import cheerio from 'cheerio'
 import request from 'requestretry'
 import plimit from 'p-limit'
 import csv from 'csvtojson'
-import mkdirp from 'mkdirp'
 
 import {
   dashifyString,
+  enumValueFromKey,
   bitmaskFromValues,
   stringFromFile,
   stringToFile,
@@ -22,18 +22,15 @@ import {
 } from '@ultrabis/util'
 
 import {
-  ItemRecord,
-  ItemSuffixRecord,
-  ItemListRecord,
   ItemSuffixType,
-  TargetType,
+  CreatureType,
   itemBaseName,
   itemSuffixTypeFromName,
   pvpRankFromText,
   classesMaskFromText
 } from '@ultrabis/wow-common'
 
-import { itemRecordAffix } from '@ultrabis/wow-mt'
+import { ItemRecord, ItemSuffixRecord, ItemListRecord, itemRecordAffix } from '../src'
 
 interface WowheadItemParserResult {
   item: ItemRecord
@@ -43,10 +40,10 @@ interface WowheadItemParserResult {
 
 const xmlOutputDir = 'cache/items'
 const iconOutputDir = 'cache/icons'
-const masterItemListFile = `cache/itemList-master.json`
-const masterAbilityListFile = `cache/abilityList-master.json`
-const masterItemSuffixFile = `cache/itemSuffix-master.json`
-const cacheItemSuffixFile = `cache/itemSuffix.json`
+const masterItemListFile = `src/master/itemList.json`
+const masterAbilityFile = `src/master/ability.json`
+const masterItemSuffixFile = `src/master/itemSuffix.json`
+const zoneFile = `src/master/zone.json`
 
 export const hrTimeToSeconds = (hrtime: any): any => {
   return (hrtime[0] + hrtime[1] / 1e9).toFixed(3)
@@ -122,6 +119,15 @@ export const wowheadItemName = (itemName: string): string => {
   return dashifyString(itemBaseName(itemName))
 }
 
+/*
+export const zoneRecordFromId = (id: number): ZoneRecord | undefined => {
+  const zoneRecord = jsonFromFile(zoneFile).find((zoneRecord: ZoneRecord) => {
+    return zoneRecord.id === id
+  })
+  return zoneRecord
+}
+*/
+
 /**
  *
  * read itemList file and return the itemName based on itemId
@@ -196,7 +202,7 @@ export const wowheadDownloadMasterItemList = async (outputPath: string): Promise
  *
  * @param outputPath write to file
  */
-export const wowheadDownloadMasterAbilityList = async (outputPath: string): Promise<void> => {
+export const wowheadDownloadMasterAbility = async (outputPath: string): Promise<void> => {
   /* if file already exists, no work to do */
   if (fileExists(outputPath)) {
     return
@@ -292,11 +298,11 @@ export const wowheadScrapeItemList = async (): Promise<object[]> => {
  *
  */
 export const wowheadDownloadAbilities = async (): Promise<void> => {
-  await wowheadDownloadMasterAbilityList(masterAbilityListFile)
+  await wowheadDownloadMasterAbility(masterAbilityFile)
 
   // read in abilityList
-  const masterAbilityList = jsonFromFile(masterAbilityListFile)
-  const abilityCount = masterAbilityList.length
+  const masterAbilities = jsonFromFile(masterAbilityFile)
+  const abilityCount = masterAbilities.length
 
   // iterate itemList and download XML, HTML, and icon for each item
   console.log(`Processing ${abilityCount} abilities...`)
@@ -426,7 +432,7 @@ export const wowheadParseItem = async (
   const dataStrings = await Promise.all([
     stringFromGzipFile(`${baseFilePath}.xml.gz`),
     stringFromGzipFile(`${baseFilePath}.html.gz`),
-    stringFromFile(`custom/overrides/${itemId}.json`)
+    stringFromFile(`src/custom/overrides/${itemId}.json`)
   ])
 
   const xml = dataStrings[0]
@@ -512,9 +518,12 @@ export const wowheadParseItem = async (
   itemRecord.unique = btob(ttText.includes(`>Unique<`))
   itemRecord.bop = btob(stringFromComment(ttText, 'bo') === `Binds when picked up`)
   if (ttText.includes('Undead and Demons')) {
-    itemRecord.targets = bitmaskFromValues([TargetType.Undead, TargetType.Demon], true).toString()
+    itemRecord.targets = bitmaskFromValues(
+      [CreatureType.Undead, CreatureType.Demon],
+      true
+    ).toString()
   } else if (ttText.includes('Increases damage done to Undead')) {
-    itemRecord.targets = bitmaskFromValues([TargetType.Undead], true).toString()
+    itemRecord.targets = bitmaskFromValues([CreatureType.Undead], true).toString()
   }
   const tt = cheerio.load(ttText, { xmlMode: true })
   const droppedBy = tt('.whtt-droppedby').text()
@@ -697,7 +706,6 @@ export const wowheadWriteItems = async (
   parseResults: WowheadItemParserResult[],
   itemFile: string,
   itemStaticFile: string,
-  itemRandomFile: string,
   itemSuffixFile: string
 ): Promise<void> => {
   const itemsStatic: ItemRecord[] = []
@@ -737,104 +745,43 @@ export const wowheadWriteItems = async (
   console.log(`writing static item db: ${itemsStatic.length}`)
   jsonToFile(itemStaticFile, itemsStatic)
 
-  console.log(`writing random enchant item db: ${itemsRandom.length}`)
-  jsonToFile(itemRandomFile, itemsRandom)
+  //console.log(`writing random enchant item db: ${itemsRandom.length}`)
+  //jsonToFile(itemRandomFile, itemsRandom)
 
   console.log(`writing itemSuffix db: ${itemSuffixSet.size}`)
   jsonToFile(itemSuffixFile, Array.from(itemSuffixSet))
 }
 
-export const createDBMoonkin = async (): Promise<void> => {
-  return createDBCustom('moonkin', [
-    ItemSuffixType.ArcaneWrath,
-    ItemSuffixType.NaturesWrath,
-    ItemSuffixType.Sorcery,
-    ItemSuffixType.Restoration
-  ])
-}
-
-export const createDBWarlock = async (): Promise<void> => {
-  return createDBCustom('warlock', [
-    ItemSuffixType.ShadowWrath,
-    ItemSuffixType.FieryWrath,
-    ItemSuffixType.Sorcery
-  ])
-}
-
-export const createDBMage = async (): Promise<void> => {
-  return createDBCustom('mage', [
-    ItemSuffixType.FieryWrath,
-    ItemSuffixType.FrozenWrath,
-    ItemSuffixType.Sorcery
-  ])
-}
-
-export const createDBFeral = async (): Promise<void> => {
-  return createDBCustom('feral', [
-    ItemSuffixType.Agility,
-    ItemSuffixType.Striking,
-    ItemSuffixType.TheTiger,
-    ItemSuffixType.TheBear,
-    ItemSuffixType.TheMonkey,
-    ItemSuffixType.TheWolf,
-    ItemSuffixType.TheFalcon,
-    ItemSuffixType.Stamina,
-    ItemSuffixType.Eluding,
-    ItemSuffixType.Power
-  ])
-}
-
-export const createDBCustom = async (dbName: string, validSuffixTypes: number[]): Promise<void> => {
-  const itemListFile = `cache/itemList-${dbName}.json`
-
-  // FIXME: this is dumb I know
-  removeFile(itemListFile)
-
-  // so we ultimately need `itemListFile` to exist. if it doesn't exist we'll create it based
-  // on a file in 'custom/'. in order:
-  //  - .json: json file in itemList format
-  //  - .txt: text file of item names, one per line
-  //  - .csv: a CSV with an 'Name' column
-  if (!fileExists(itemListFile)) {
-    const customItemListFile = `custom/${dbName}.json`
-    const customTXTFile = `custom/${dbName}.txt`
-    const customCSVFile = `custom/${dbName}.csv`
-    if (fileExists(customItemListFile)) {
-      stringToFile(itemListFile, stringFromFile(customItemListFile))
-    } else if (fileExists(customTXTFile)) {
-      jsonToFile(itemListFile, await parseTXT(customTXTFile))
-    } else {
-      jsonToFile(itemListFile, await parseCSV(customCSVFile, 'Name'))
-    }
+export const createDB = async (dbName: string, validSuffixTypes?: number[]): Promise<void> => {
+  // full can just read the master item list, which is already in JSON
+  if (dbName === 'full') {
+    return await _createDB('full', masterItemListFile, { validSuffixTypes: validSuffixTypes })
   }
 
-  return await createDB(dbName, itemListFile, { validSuffixTypes: validSuffixTypes })
+  // all other DB's need to convert a text file to JSON
+  const itemListTXTFile = `src/custom/${dbName}/itemList.txt`
+  const itemListJSONFile = `src/custom/${dbName}/itemList.json`
+  jsonToFile(itemListJSONFile, await parseTXT(itemListTXTFile))
+  return await _createDB(dbName, itemListJSONFile, { validSuffixTypes: validSuffixTypes })
 }
 
-export const createDBFull = async (): Promise<void> => {
-  return await createDB(`full`, `cache/itemList-master.json`)
-}
-
-export const createDB = async (
+const _createDB = async (
   dbName: string,
   itemListFile: string,
   opts?: { validSuffixTypes?: number[] }
 ): Promise<void> => {
-  mkdirp.sync(`src/db/${dbName}`)
-
   // parse items
   console.log(`parsing items from ${itemListFile}`)
   const startTime = process.hrtime()
   const items = await wowheadParseItems(itemListFile, opts)
 
   // write db
-  console.log(`writing files to src/db/${dbName}`)
+  console.log(`writing files to src/custom/${dbName}`)
   await wowheadWriteItems(
     items,
-    `src/db/${dbName}/item.json`,
-    `src/db/${dbName}/item-static.json`,
-    `src/db/${dbName}/item-random.json`,
-    `src/db/${dbName}/itemSuffix.json`
+    `src/custom/${dbName}/item.json`,
+    `src/custom/${dbName}/item-static.json`,
+    `src/custom/${dbName}/itemSuffix.json`
   )
 
   const elapsedTime = hrTimeToSeconds(process.hrtime(startTime))

@@ -10,6 +10,7 @@ test('strings', () => {
   expect(util.dashifyString(testString)).toBe('arcane-wrath')
   expect(util.fuzzyIncludes(testString, 'arcane wrath')).toBe(true)
   expect(util.fuzzyEquals(testString, 'arcane wrath')).toBe(true)
+  expect(util.prettyInterCap(`TheGreatSea`)).toBe(`The Great Sea`)
 })
 
 enum testEnum {
@@ -28,7 +29,7 @@ test('enums', () => {
 })
 
 test('bitmasks', () => {
-  const myBitmask = BigInt(3)
+  const myBitmask = 3
 
   /* check bitmask values...*/
   expect(util.bitmaskIncludes(myBitmask, testEnum.Foo, true)).toBe(true)
@@ -59,9 +60,18 @@ test('paramins', () => {
 })
 
 test('isEqual', () => {
-  const obj1 = [ { foo: 1, bar: 'howdy' }, { foo: 2, bar: 'there' } ]
-  const obj2 = [ { foo: 1, bar: 'howdy' }, { foo: 2, bar: 'there' } ]
-  const obj3 = [ { foo: 2, bar: 'howdy' }, { foo: 3, bar: 'there' } ]
+  const obj1 = [
+    { foo: 1, bar: 'howdy' },
+    { foo: 2, bar: 'there' }
+  ]
+  const obj2 = [
+    { foo: 1, bar: 'howdy' },
+    { foo: 2, bar: 'there' }
+  ]
+  const obj3 = [
+    { foo: 2, bar: 'howdy' },
+    { foo: 3, bar: 'there' }
+  ]
 
   expect(util.isEqual(obj1, obj2)).toBe(true)
   expect(util.isEqual(obj1, obj3)).toBe(false)

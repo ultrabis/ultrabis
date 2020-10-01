@@ -13,7 +13,7 @@
     "build": "yarn build:clean && yarn build:tsc",
     "build:clean": "rimraf lib",
     "build:tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "test": "yarn build && yarn test:unit && yarn test:integration",
+    "test": "yarn test:unit",
     "test:unit": "yarn run jest",
     "test:integration": "ts-node -sT __tests__/integration.ts",
     "prepublishOnly": "yarn build:clean && yarn build:tsc"

@@ -1,3 +1,6 @@
+/**
+ * ItemQuality
+ */
 enum ItemQuality {
   Poor = 0,
   Common = 1,

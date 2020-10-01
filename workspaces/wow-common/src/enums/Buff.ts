@@ -1,3 +1,6 @@
+/**
+ * Player buffs. Needs work.
+ */
 enum Buff {
   MoonkinAura,
   PowerInfusion,

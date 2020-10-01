@@ -11,7 +11,8 @@
     "build:cache": "ts-node -sT bin/build-cache.ts",
     "build:db": "ts-node -sT bin/build-db.ts",
     "build:tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "test:play": "ts-node -sT bin/test-play.ts",
+    "test:play": "ts-node -sT __tests__/test-play.ts",
+    "test:dbplay": "ts-node -sT bin/db-play.ts",
     "build:clean": "rimraf lib",
     "prepublishOnly": "yarn run clean && yarn run build:tsc"
   },

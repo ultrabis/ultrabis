@@ -2,10 +2,10 @@
 /// <reference types="jest" />
 
 import * as common from '../src/index'
-import { ItemSuffixType, PlayableClass } from '../src/enums'
+import { ItemSuffixType, PlayableClass } from '../src'
 
 test('misc', () => {
-  expect(common.playableClassesFromText(`Classes: Warrior, Paladin, Hunter`)).toStrictEqual([
+  expect(common.classesFromText(`Classes: Warrior, Paladin, Hunter`)).toStrictEqual([
     PlayableClass.Warrior,
     PlayableClass.Paladin,
     PlayableClass.Hunter

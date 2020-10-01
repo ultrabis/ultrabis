@@ -1,13 +1,119 @@
+/*
 import { fuzzyEquals, cloneObject, Filter } from '@ultrabis/util'
-import { DB } from '@ultrabis/wow-db'
-import { queryItem, droppedByWorldBoss } from '../src'
 import * as filter from '../src/filter'
+import { ItemRecord, Match } from '@ultrabis/wow-common'
+*/
+
+import { enumKeyFromValue, prettyInterCap } from '@ultrabis/util'
+import { DB } from '@ultrabis/wow-db'
+import { ItemRecord, ItemSuffixRecord, ItemQuery, ItemSlot, Zone } from '@ultrabis/wow-common'
+import * as match from '../src/match'
+import { itemRecordsFromBase, droppedByWorldBoss } from '../src/item'
+
+import {
+  queryItemByIdAndSuffixId,
+  queryItemById,
+  queryItemByName,
+  queryItemByPartialName
+} from '../src/query'
+
+const queryItem = (
+  itemRecords: ItemRecord[],
+  itemSuffixRecords: ItemSuffixRecord[],
+  opts: ItemQuery
+): ItemRecord[] => {
+  let primary = [] as ItemRecord[]
+
+  // first handle primary identifiers. only one set of primary identifiers is used e.g.
+  // if both `id` and `name` are passed, we'll ignore `name` in favor of `id`.
+  if (opts.id && opts.suffixId) {
+    primary = queryItemByIdAndSuffixId(itemRecords, itemSuffixRecords, opts.id, opts.suffixId)
+  } else if (opts.id) {
+    primary = queryItemById(itemRecords, itemSuffixRecords, opts.id)
+  } else if (opts.name) {
+    primary = queryItemByName(itemRecords, itemSuffixRecords, opts.name)
+  } else if (opts.partialName) {
+    primary = queryItemByPartialName(itemRecords, itemSuffixRecords, opts.partialName)
+  } else {
+    primary = itemRecords
+  }
+
+  // check additional filters, writing to `secondary`
+  const secondary = primary.filter((itemRecord: ItemRecord) => {
+    // slot
+    if (opts.slot && !match.itemRecordSlot(itemRecord, opts.slot)) {
+      return false
+    }
+
+    return true
+  })
+
+  // build final array; any 'base items' need to be converted to random enchants
+  const final = [] as ItemRecord[]
+  for (const itemRecord of secondary) {
+    final.push(...itemRecordsFromBase(itemRecord, itemSuffixRecords))
+  }
+
+  return final
+}
+
+/*
+const results = queryItem(DB.item, DB.itemSuffix, { id: 10250, suffixId: 802, slot: ItemSlot.Head })
+console.log(results)
+*/
+
+// Desertwalker Cane is a phase 5 item
+const results = queryItem(DB.item, DB.itemSuffix, { name: 'Desertwalker Cane' })
+console.log(results)
+if (results[0].droppedAt) {
+  const droppedAt = enumKeyFromValue(Zone, results[0].droppedAt)
+  if (droppedAt) {
+    console.log(prettyInterCap(droppedAt))
+  }
+}
+
+console.log(DB.zone)
+
+//const droppedBy
+//console.log(`Dropped At: `)
+
+/*
+const result = queryItem(DB.item, DB.itemSuffix, { name: 'Blacklight Bracer' })
+if (droppedByWorldBoss(result[0])) {
+  console.log(`yes, dropped by world boss`)
+} else {
+  console.log(`no, not dropped by world boss`)
+}
+*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+const results = DB.item.filter((itemRecord: ItemRecord) => {
+  if (match.itemRecordId(itemRecord, 10250, Match.Includes)) {
+    return true
+  }
+
+  return false
+})
+
+console.log(results)
+*/
+
+/*
+const results = DB.item.filter((itemRecord: ItemRecord) =>
+  itemRecordsById(itemRecord, 10250, Filter.IncludeOnly)
+)
+console.log(results)
+*/
+
+//filter.itemRecordsById
 
 // Print all items *not* dropped by a world boss
 //console.log(filter.itemRecordsByWorldBosses(DB.item, Filter.Exclude))
 
 // Print all items dropped by a world boss
-console.log(filter.itemRecordsByWorldBosses(DB.item, Filter.Only))
+//console.log(filter.itemRecordsByWorldBosses(DB.item, Filter.Only))
 
 /*
 const result = queryItem(DB.item, DB.itemSuffix, { name: 'Blacklight Bracer' })

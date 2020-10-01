@@ -1,4 +1,17 @@
 /**
+ *
+ * Return pretty version of InterCap strings like the ones used in enum keys, e.g.
+ *
+ * 'TheGreatSea' -> 'The Great Sea'
+ *
+ */
+export const prettyInterCap = (s: string): string => {
+  return s
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+}
+
+/**
  * Strips special characters from `s`, not including dashes and spaces
  *
  * @param s string to strip

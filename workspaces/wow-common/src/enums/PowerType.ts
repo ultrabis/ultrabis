@@ -1,3 +1,6 @@
+/**
+ * TBD: Taken from Blizzard API
+ */
 enum PowerType {
   Mana = 0,
   Rage = 1,

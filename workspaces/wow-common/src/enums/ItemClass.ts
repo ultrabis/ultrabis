@@ -1,3 +1,6 @@
+/**
+ * TBD. Taken from Blizzard API.
+ */
 enum ItemClass {
   Consumable = 0,
   Container = 1,

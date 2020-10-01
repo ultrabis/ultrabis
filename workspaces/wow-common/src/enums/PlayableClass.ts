@@ -1,3 +1,6 @@
+/**
+ * Playable classes. Taken from Blizzard API.
+ */
 enum PlayableClass {
   Warrior = 1,
   Paladin = 2,

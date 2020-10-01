@@ -1,4 +1,4 @@
-import { PvPRank, PlayableClass } from './enums'
+import { PvPRank, PlayableClass } from './'
 import { enumValueFromKey, enumValuesFromKeys, bitmaskFromValues } from '@ultrabis/util'
 
 export const pvpRankFromText = (text: string): PvPRank | undefined => {
@@ -11,6 +11,6 @@ export const classesFromText = (text: string): PlayableClass[] => {
   return enumValuesFromKeys(PlayableClass, text.replace(/Classes: /g, '').split(','))
 }
 
-export const classesMaskFromText = (text: string): BigInt => {
+export const classesMaskFromText = (text: string): number => {
   return bitmaskFromValues(classesFromText(text), true)
 }

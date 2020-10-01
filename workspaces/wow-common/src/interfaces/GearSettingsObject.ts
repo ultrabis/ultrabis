@@ -1,4 +1,4 @@
-import { ItemSlot } from '../enums'
+import { ItemSlot } from '../'
 
 export default interface GearSettingsObject {
   custom: number[][] // [GearSlot][itemId, suffixId, enchantId]. itemId and enchantId can also be (0 = BIS, 1 = Naked).

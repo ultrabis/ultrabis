@@ -1,3 +1,6 @@
+/**
+ * Values were taken from blizzard API
+ */
 enum ArmorSubclass {
   Rings = -2,
   Trinkets = -4,

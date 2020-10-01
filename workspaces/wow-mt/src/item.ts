@@ -1,10 +1,12 @@
-import { enumValueFromKey } from '@ultrabis/util'
+import { enumValueFromKey, enumKeyFromValue } from '@ultrabis/util'
 
 import {
   ItemRecord,
   ItemSuffixRecord,
   ItemBonusType,
   ItemSuffixType,
+  Target,
+  Zone,
   WorldBoss
 } from '@ultrabis/wow-common'
 
@@ -16,7 +18,8 @@ const zsum = (one: number | undefined, two: number | undefined): number | undefi
 
 export const droppedByWorldBoss = (itemRecord: ItemRecord | undefined): boolean => {
   if (itemRecord && itemRecord.droppedBy) {
-    return enumValueFromKey(WorldBoss, itemRecord.droppedBy) !== undefined
+    const targetName = enumKeyFromValue(Target, itemRecord.droppedBy)
+    return enumValueFromKey(WorldBoss, targetName ? targetName : ``) !== undefined
   }
   return false
 }

@@ -1,3 +1,6 @@
+/**
+ * All creatures classified as world bosses
+ */
 enum WorldBosses {
   Azuregos,
   Emeriss,

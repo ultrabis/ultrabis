@@ -1,3 +1,6 @@
+/**
+ * Player PVP Ranks. Taken from Blizzard API
+ */
 enum PvPRank {
   Scout = 1,
   Private = 1,

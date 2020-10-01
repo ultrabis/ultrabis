@@ -1,3 +1,6 @@
+/**
+ * Internal: TBD
+ */
 enum PlayableSpec {
   Moonkin,
   FireMage

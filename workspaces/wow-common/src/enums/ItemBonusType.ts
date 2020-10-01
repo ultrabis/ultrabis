@@ -1,3 +1,6 @@
+/**
+ * e.g. Master's Hat of Arcane Wrath has an ItemBonusType of ArcaneSpellDamage
+ */
 enum ItemBonusType {
   Invalid, // FIXME: removing this breaks stuff
   Agility,

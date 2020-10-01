@@ -1,4 +1,6 @@
-/* these represent the indexes of the customGear array */
+/**
+ * Internal: the indexes of the `customGear` array
+ */
 enum GearSlot {
   Head,
   Hands,

@@ -1,3 +1,6 @@
+/**
+ * All zones classified as raids.
+ */
 enum Raid {
   MoltenCore,
   Onyxia,

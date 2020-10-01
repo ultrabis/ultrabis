@@ -1,3 +1,6 @@
+/**
+ * Taken from Warcraft Logs
+ */
 enum MagicSchool {
   Physical,
   Arcane,

@@ -1,3 +1,6 @@
+/**
+ * Playable races. Taken from Blizzard API.
+ */
 enum PlayableRace {
   Human = 1,
   Orc = 2,

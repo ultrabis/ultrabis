@@ -1,3 +1,6 @@
+/**
+ * Weapon subclass. Taken from Blizzard API.
+ */
 enum WeaponSubclass {
   OneHandedAxe = 0,
   TwoHandedAxe = 1,

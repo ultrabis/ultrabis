@@ -1,0 +1,252 @@
+[
+    {
+        "id": 24164,
+        "name": "Presence of Sight",
+        "slot": 1,
+        "phase": 4,
+        "icon": "spell_shadow_detectlesserinvisibility",
+        "text": "+18 spell damage / +1 spell hit",
+        "spellDamage": 18,
+        "spellHit": 1
+    },
+    {
+        "id": 24164,
+        "name": "Presence of Sight",
+        "slot": 7,
+        "phase": 4,
+        "icon": "spell_shadow_detectlesserinvisibility",
+        "text": "+18 spell damage / +1 spell hit",
+        "spellDamage": 18,
+        "spellHit": 1
+    },
+    {
+        "id": 22749,
+        "name": "Enchant Weapon - Spell Power",
+        "slot": 21,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+30 Spell Damage and Healing",
+        "spellDamage": 30,
+        "spellHealing": 30
+    },
+    {
+        "id": 19449,
+        "name": "Enchant Weapon - Mighty Intellect",
+        "slot": 21,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+22 Intellect",
+        "intellect": 22
+    },
+    {
+        "id": 22844,
+        "name": "Arcanum of Focus",
+        "slot": 1,
+        "phase": 1,
+        "icon": "inv_misc_gem_02",
+        "text": "+8 Spell Damage and Healing",
+        "spellDamage": 8
+    },
+    {
+        "id": 24168,
+        "name": "Animist's Caress",
+        "slot": 1,
+        "phase": 4,
+        "icon": "spell_nature_reincarnation",
+        "text": "+10 Stamina +10 Intellect +24 Healing",
+        "spellHealing": 24,
+        "stamina": 10,
+        "intellect": 10
+    },
+    {
+        "id": 24168,
+        "name": "Animist's Caress",
+        "slot": 7,
+        "phase": 4,
+        "icon": "spell_nature_reincarnation",
+        "text": "+10 Stamina +10 Intellect +24 Healing",
+        "spellHealing": 24,
+        "stamina": 10,
+        "intellect": 10
+    },
+    {
+        "id": 15404,
+        "name": "Lesser Arcanum of Voracity",
+        "slot": 1,
+        "phase": 1,
+        "icon": "inv_misc_gem_03",
+        "text": "+8 Intellect",
+        "intellect": 8
+    },
+    {
+        "id": 15404,
+        "name": "Lesser Arcanum of Voracity",
+        "slot": 7,
+        "phase": 1,
+        "icon": "inv_misc_gem_03",
+        "text": "+8 Intellect",
+        "intellect": 8
+    },
+    {
+        "id": 29467,
+        "name": "Power of the Scourge",
+        "slot": 3,
+        "phase": 6,
+        "icon": "spell_shadow_darkritual",
+        "text": "+15 Spell Damage and Healing and 1% Spell Critical",
+        "spellDamage": 15,
+        "spellCrit": 1
+    },
+    {
+        "id": 24421,
+        "name": "Zandalar Signet of Mojo",
+        "slot": 3,
+        "phase": 4,
+        "icon": "inv_jewelry_ring_46",
+        "text": "+18 Spell Damage and Healing",
+        "spellDamage": 18
+    },
+    {
+        "id": 29475,
+        "name": "Resilience of the Scourge",
+        "slot": 3,
+        "phase": 6,
+        "icon": "spell_shadow_deadofnight",
+        "text": "+31 Healing and 5 mp5",
+        "spellHealing": 31,
+        "spellDamage": 11,
+        "mp5": 5
+    },
+    {
+        "id": 20025,
+        "name": "Enchant Chest - Greater Stats",
+        "slot": 5,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+4 All Stats",
+        "strength": 4,
+        "agility": 4,
+        "stamina": 4,
+        "intellect": 4,
+        "spirit": 4
+    },
+    {
+        "id": 13941,
+        "name": "Enchant Chest - Stats",
+        "slot": 5,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+3 All Stats",
+        "strength": 3,
+        "agility": 3,
+        "stamina": 3,
+        "intellect": 3,
+        "spirit": 3
+    },
+    {
+        "id": 13700,
+        "name": "Enchant Chest - Lesser Stats",
+        "slot": 5,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+2 All Stats",
+        "strength": 2,
+        "agility": 2,
+        "stamina": 2,
+        "intellect": 2,
+        "spirit": 2
+    },
+    {
+        "id": 13626,
+        "name": "Enchant Chest - Minor Stats",
+        "slot": 5,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+1 All Stats",
+        "strength": 1,
+        "agility": 1,
+        "stamina": 1,
+        "intellect": 1,
+        "spirit": 1
+    },
+    {
+        "id": 25096,
+        "name": "Enchant Cloak - Subtlety",
+        "slot": 15,
+        "phase": 5,
+        "icon": "spell_holy_greaterheal",
+        "text": "Reduce threat by 2%"
+    },
+    {
+        "id": 20008,
+        "name": "Enchant Bracer - Greater Intellect",
+        "slot": 9,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+7 Intellect",
+        "intellect": 7
+    },
+    {
+        "id": 13822,
+        "name": "Enchant Bracer - Intellect",
+        "slot": 9,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+5 Intellect",
+        "intellect": 5
+    },
+    {
+        "id": 13622,
+        "name": "Enchant Bracer - Lesser Intellect",
+        "slot": 9,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+3 Intellect",
+        "intellect": 3
+    },
+    {
+        "id": 23807,
+        "name": "Enchant Bracer - Mana Regeneration",
+        "slot": 9,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "Restores 4 mana every 5 seconds",
+        "mp5": 4
+    },
+    {
+        "id": 25091,
+        "name": "Enchant Gloves - Healing Power",
+        "slot": 10,
+        "phase": 5,
+        "icon": "spell_holy_greaterheal",
+        "text": "+30 Healing",
+        "spellHealing": 30
+    },
+    {
+        "id": 22844,
+        "name": "Arcanum of Focus",
+        "slot": 7,
+        "phase": 1,
+        "icon": "inv_misc_gem_02",
+        "text": "+8 Spell Damage and Healing",
+        "spellDamage": 8,
+        "spellHealing": 8
+    },
+    {
+        "id": 13890,
+        "name": "Enchant Boots - Minor Speed",
+        "slot": 8,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "Slight movement speed increase"
+    },
+    {
+        "id": 20024,
+        "name": "Enchant Boots - Spirit",
+        "slot": 8,
+        "phase": 1,
+        "icon": "spell_holy_greaterheal",
+        "text": "+5 Spirit",
+        "spirit": 5
+    }
+]

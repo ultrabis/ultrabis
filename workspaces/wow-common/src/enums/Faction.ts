@@ -1,3 +1,6 @@
+/**
+ * Playable factions
+ */
 enum Faction {
   Alliance,
   Horde

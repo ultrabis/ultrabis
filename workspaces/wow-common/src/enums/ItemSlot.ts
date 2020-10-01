@@ -1,5 +1,6 @@
-/* These slot id's are based on wowheads XML */
-
+/**
+ * Based on wowhead's XML
+ */
 enum ItemSlot {
   Ammo = 0,
   Head = 1,

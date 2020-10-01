@@ -1,3 +1,6 @@
+/**
+ * All zones classified as a dungeon
+ */
 enum Dungeon {
   BlackrockDepths,
   ScarletMonastery,
