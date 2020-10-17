@@ -6,14 +6,22 @@ export default interface ItemQuery extends Query {
   id?: number
   suffixId?: number
   name?: string
-  partialName?: string
 
   // additional filters
   slot?: ItemSlot
   phase?: number
   faction?: Faction
   pvpRank?: PvPRank
-  includeWorldBosses?: boolean
-  includeRaids?: boolean
-  includeRandomEnchants?: boolean
+  /**
+   * ignores items dropped by world bosses
+   */
+  excludeWorldBosses?: boolean
+  /**
+   * ignore items dropped in raids
+   */
+  excludeRaids?: boolean
+  /**
+   * ignores random enchant items
+   */
+  excludeRandomEnchants?: boolean
 }

@@ -96,6 +96,7 @@
   {
     "id": 16,
     "name": "Azshara",
+    "type": 3,
     "max": 55,
     "min": 42
   },
@@ -174,12 +175,14 @@
   {
     "id": 33,
     "name": "Stranglethorn Vale",
+    "type": 3,
     "max": 50,
     "min": 30
   },
   {
     "id": 618,
     "name": "Winterspring",
+    "type": 3,
     "min": 55,
     "max": 60
   },
@@ -195,12 +198,14 @@
   {
     "id": 47,
     "name": "The Hinterlands",
+    "type": 3,
     "min": 41,
     "max": 49
   },
   {
     "id": 361,
     "name": "Felwood",
+    "type": 3,
     "min": 47,
     "max": 54
   },
@@ -216,30 +221,35 @@
   {
     "id": 405,
     "name": "Desolace",
+    "type": 3,
     "max": 39,
     "min": 30
   },
   {
     "id": 15,
     "name": "Dustwallow Marsh",
+    "type": 3,
     "max": 61,
     "min": 36
   },
   {
     "id": 440,
     "name": "Tanaris",
+    "type": 3,
     "min": 40,
     "max": 50
   },
   {
     "id": 331,
     "name": "Ashenvale",
+    "type": 3,
     "max": 30,
     "min": 19
   },
   {
     "id": 721,
     "name": "Gnomeregan",
+    "type": 3,
     "min": 26,
     "max": 36,
     "n": 5,
@@ -248,48 +258,56 @@
   {
     "id": 267,
     "name": "Hillsbrad Foothills",
+    "type": 3,
     "min": 20,
     "max": 31
   },
   {
     "id": 139,
     "name": "Eastern Plaguelands",
+    "type": 3,
     "min": 54,
     "max": 59
   },
   {
     "id": 493,
     "name": "Moonglade",
+    "type": 3,
     "min": 15,
     "max": 15
   },
   {
     "id": 3,
     "name": "Badlands",
+    "type": 3,
     "min": 36,
     "max": 45
   },
   {
     "id": 4,
     "name": "Blasted Lands",
+    "type": 3,
     "min": 46,
     "max": 63
   },
   {
     "id": 28,
     "name": "Western Plaguelands",
+    "type": 3,
     "min": 46,
     "max": 57
   },
   {
     "id": 45,
     "name": "Arathi Highlands",
+    "type": 3,
     "min": 30,
     "max": 40
   },
   {
     "id": 1377,
     "name": "Silithus",
+    "type": 3,
     "min": 55,
     "max": 59
   },
@@ -304,12 +322,14 @@
   {
     "id": 357,
     "name": "Feralas",
+    "type": 3,
     "max": 60,
     "min": 41
   },
   {
     "id": 8,
     "name": "Swamp of Sorrows",
+    "type": 3,
     "min": 36,
     "max": 43
   },
@@ -325,24 +345,28 @@
   {
     "id": 51,
     "name": "Searing Gorge",
+    "type": 3,
     "min": 43,
     "max": 56
   },
   {
     "id": 46,
     "name": "Burning Steppes",
+    "type": 3,
     "min": 50,
     "max": 59
   },
   {
     "id": 10,
     "name": "Duskwood",
+    "type": 3,
     "min": 10,
     "max": 30
   },
   {
     "id": 490,
     "name": "Un'Goro Crater",
+    "type": 3,
     "min": 48,
     "max": 55
   },
@@ -358,24 +382,28 @@
   {
     "id": 17,
     "name": "The Barrens",
+    "type": 3,
     "max": 33,
     "min": 10
   },
   {
     "id": 11,
     "name": "Wetlands",
+    "type": 3,
     "max": 30,
     "min": 20
   },
   {
     "id": 400,
     "name": "Thousand Needles",
+    "type": 3,
     "max": 35,
     "min": 24
   },
   {
     "id": 406,
     "name": "Stonetalon Mountains",
+    "type": 3,
     "max": 25,
     "min": 15
   },
@@ -388,54 +416,63 @@
   {
     "id": 36,
     "name": "Alterac Mountains",
+    "type": 3,
     "max": 39,
     "min": 27
   },
   {
     "id": 44,
     "name": "Redridge Mountains",
+    "type": 3,
     "max": 25,
     "min": 15
   },
   {
     "id": 148,
     "name": "Darkshore",
+    "type": 3,
     "max": 19,
     "min": 11
   },
   {
     "id": 40,
     "name": "Westfall",
+    "type": 3,
     "max": 18,
     "min": 9
   },
   {
     "id": 130,
     "name": "Silverpine Forest",
+    "type": 3,
     "max": 20,
     "min": 10
   },
   {
     "id": 1519,
     "name": "Stormwind City",
+    "type": 3,
     "max": 60,
     "min": 1
   },
   {
     "id": 38,
     "name": "Loch Modan",
+    "type": 3,
     "max": 18,
     "min": 10
   },
   {
     "id": 1637,
     "name": "Orgrimmar",
+    "type": 3,
     "max": 60,
     "min": 1
   },
   {
     "id": 85,
     "name": "Tirisfal Glades",
+    "type": 3,
     "max": 12,
     "min": 1
   },
@@ -450,64 +487,75 @@
   {
     "id": 1,
     "name": "Dun Morogh",
+    "type": 3,
     "min": 1,
     "max": 12
   },
   {
     "id": 41,
     "name": "Deadwind Pass",
+    "type": 3,
     "min": 50,
     "max": 60
   },
   {
     "id": 12,
     "name": "Elwynn Forest",
+    "type": 3,
     "min": 1,
     "max": 10
   },
   {
     "id": 1657,
     "name": "Darnassus",
+    "type": 3,
     "min": 1,
     "max": 60
   },
   {
     "id": 1537,
     "name": "Ironforge",
+    "type": 3,
     "min": 1,
     "max": 60
   },
   {
     "id": 141,
     "name": "Teldrassil",
+    "type": 3,
     "min": 1,
     "max": 11
   },
   {
     "id": 1497,
     "name": "Undercity",
+    "type": 3,
     "min": 1,
     "max": 60
   },
   {
     "id": 1638,
     "name": "Thunder Bluff",
+    "type": 3,
     "min": 1,
     "max": 60
   },
   {
     "id": 215,
     "name": "Mulgore",
+    "type": 3,
     "min": 1,
     "max": 10
   },
   {
     "id": 25,
-    "name": "Blackrock Mountain"
+    "name": "Blackrock Mountain",
+    "type": 3
   },
   {
     "id": 14,
     "name": "Durotar",
+    "type": 3,
     "min": 1,
     "max": 10
   },
@@ -529,18 +577,22 @@
   },
   {
     "id": 2257,
-    "name": "Deeprun Tram"
+    "name": "Deeprun Tram",
+    "type": 3
   },
   {
     "id": 207,
-    "name": "The Great Sea"
+    "name": "The Great Sea",
+    "type": 3
   },
   {
     "id": 1941,
-    "name": "Caverns of Time"
+    "name": "Caverns of Time",
+    "type": 3
   },
   {
     "id": 457,
-    "name": "The Veiled Sea"
+    "name": "The Veiled Sea",
+    "type": 3
   }
 ]

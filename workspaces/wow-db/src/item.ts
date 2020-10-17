@@ -1,30 +1,11 @@
+/**
+ * Functions to convert base item record to random enchants.
+ * This is shared between the database creation tools in `bin`
+ * and the exported library source in `src`.
+ */
+
 import { ItemBonusType, ItemSuffixType } from '@ultrabis/wow-common'
 import { ItemRecord, ItemSuffixRecord } from './'
-
-/*
-export const droppedByWorldBoss = (itemRecord: ItemRecord | undefined): boolean => {
-  if (itemRecord && itemRecord.droppedBy) {
-    const targetName = enumKeyFromValue(Target, itemRecord.droppedBy)
-    return enumValueFromKey(WorldBoss, targetName ? targetName : ``) !== undefined
-  }
-  return false
-}
-*/
-
-/**
- *
- * Is this a base item? A base item is the root item for a set of random enchants
- * e.g. Master's Hat
- *
- * @param itemRecord
- */
-export const itemRecordIsBase = (itemRecord: ItemRecord | undefined): boolean => {
-  return (
-    itemRecord !== undefined &&
-    itemRecord.validSuffixIds !== undefined &&
-    itemRecord.validSuffixIds.length > 0
-  )
-}
 
 /**
  *
